@@ -6,6 +6,7 @@ import Button from '../components/Button';
 import { storage, db } from '../../firebase';
 import { useRoute } from "@react-navigation/native";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useNavigation } from '@react-navigation/native';
 
 const auth = getAuth();
 const user = auth.currentUser;
@@ -50,7 +51,7 @@ const itemConverter = {
 
 //The screen designed to be invoked with objectID to fetch it from the database (route.params.filename)
 
-export default function Item(){
+export default function Item({navigation}){
     //handle image url request from firestore
     const[image, setImage] = useState();
     const[item, setItem] = useState();
@@ -106,7 +107,7 @@ export default function Item(){
 
         
             
-         if (user && item.owner_ID == uid){
+         if (item.owner_ID == uid){
             
 
             return(
@@ -117,11 +118,9 @@ export default function Item(){
     
                     <View style={{flex: 1, justifyContent: 'flex-start', alignItems:'flex-start'}}>
                         <Button mode="contained">
-                            Save
+                            Saves
                         </Button>
-                        <Button mode="contained">
-                            Edit
-                        </Button>
+                        <Button mode = 'contained' onPress={() => {navigation.navigate('EditItem')}}> Edit</Button>
                         <Text style={styles.itemName}>{item.name + '   ' + item.price + ' €'}</Text>
                         <Text style={styles.itemType}>{"Posted by " + item.owner_name}</Text>
                         <Text style={styles.itemType}>{item.type}</Text>
