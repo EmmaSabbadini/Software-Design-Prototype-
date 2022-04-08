@@ -118,7 +118,7 @@ export default function Item({navigation}){
     
                     <View style={{flex: 1, justifyContent: 'flex-start', alignItems:'flex-start'}}>
                         <Button mode="contained">
-                            Saves
+                            Save
                         </Button>
                         <Button mode = 'contained' onPress={() => {navigation.navigate('EditItem')}}> Edit</Button>
                         <Text style={styles.itemName}>{item.name + '   ' + item.price + ' €'}</Text>
