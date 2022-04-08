@@ -69,7 +69,9 @@ export default function Item({navigation}){
 });
     
     const getData = async() => {
-        //console.log("trying to access " + route.params.fileName);
+        console.log("trying to access " + route.params.fileName);
+         id = route.params.fileName;
+         console.log(id);
         const docRef = doc(db, "Items", route.params.fileName).withConverter(itemConverter);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
@@ -120,7 +122,7 @@ export default function Item({navigation}){
                         <Button mode="contained">
                             Save
                         </Button>
-                        <Button mode = 'contained' onPress={() => {navigation.navigate('EditItem')}}> Edit</Button>
+                        <Button mode = 'contained' onPress={() => {navigation.navigate('EditItem', {id})}}> Edit</Button>
                         <Text style={styles.itemName}>{item.name + '   ' + item.price + ' €'}</Text>
                         <Text style={styles.itemType}>{"Posted by " + item.owner_name}</Text>
                         <Text style={styles.itemType}>{item.type}</Text>

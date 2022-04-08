@@ -60,7 +60,7 @@ export default function EditItem(){
     
     const getData = async() => {
         //console.log("trying to access " + route.params.fileName);
-        const docRef = doc(db, "Items", route.params.fileName).withConverter(itemConverter);
+        const docRef = doc(db, "Items", id).withConverter(itemConverter);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
             // Convert to City object
