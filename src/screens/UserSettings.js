@@ -11,19 +11,21 @@ import { signInWithEmailAndPassword, sendPasswordResetEmail} from "firebase/auth
 
 import {auth} from "../../firebase"
 
+
 const user = auth.currentUser;
 if (user !== null) {
     // The user object has basic properties such as display name, email, etc.
-    const displayName = user.displayName;
-    const email = user.email;
-    const photoURL = user.photoURL;
-    const emailVerified = user.emailVerified;
+    var displayName = user.displayName;
+    var email = user.email;
+    var photoURL = user.photoURL;
+    var emailVerified = user.emailVerified;
   
     // The user's ID, unique to the Firebase project. Do NOT use
     // this value to authenticate with your backend server, if
     // you have one. Use User.getToken() instead.
     const uid = user.uid;
   }
+
 
 const Separator = () => (
     <View style={styles.separator} />
@@ -62,7 +64,11 @@ export default function UserSettings({ navigation }) {
       </Text>
       <Button
         title="Reset Password"
-        onPress={() => {sendPasswordResetEmail(auth, email); Alert.alert('Password reset email sent to', email);}}
+        onPress={() => {sendPasswordResetEmail(auth, email).catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ..
+        }); Alert.alert('Password reset email sent to', email);}}
       />
     </View>
     <Separator />
