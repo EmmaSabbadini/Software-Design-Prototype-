@@ -1,8 +1,13 @@
-import React from 'react'
-import { Image, StyleSheet } from 'react-native'
+import React from "react";
+import { Image, StyleSheet } from "react-native";
 
 export default function Logo() {
-  return <Image source={require('../assets/logo.png')} style={styles.image} />
+  return (
+    <Image
+      source={require("../assets/logo_no_background.png")}
+      style={styles.image}
+    />
+  );
 }
 
 const styles = StyleSheet.create({
@@ -11,4 +16,4 @@ const styles = StyleSheet.create({
     height: 110,
     marginBottom: 8,
   },
-})
+});
