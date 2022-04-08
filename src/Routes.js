@@ -12,6 +12,7 @@ import RegisterScreen from './screens/RegisterScreen';
 import Item from './screens/Item';
 import LoginScreen from './screens/LoginScreen';
 import UserSettings from './screens/UserSettings';
+import EditItem from './screens/EditItem';
 
 const BottomTab = () => {
 
@@ -91,6 +92,11 @@ export default Routes = () => {
           <Stack.Screen
             name = 'AddItem'
             component={AddItem}
+            options={{headerShown:false,}}
+          />
+          <Stack.Screen
+            name = 'EditItem'
+            component={EditItem}
             options={{headerShown:false,}}
           />
           <Stack.Screen
