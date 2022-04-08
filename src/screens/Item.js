@@ -9,7 +9,6 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useNavigation } from '@react-navigation/native';
 
 const auth = getAuth();
-const user = auth.currentUser;
 uid = "0";
 
 //Class template for the item fetching from firestore
@@ -55,12 +54,14 @@ export default function Item({navigation}){
     //handle image url request from firestore
     const[image, setImage] = useState();
     const[item, setItem] = useState();
+    const[user, setUser] = useState();
     const route = useRoute();
 
     const auth = getAuth();
    onAuthStateChanged(auth, (user) => {
      if (user) {
       uid = user.uid;
+      setUser(user)
       console.log(uid);
     
      } else {
@@ -139,8 +140,8 @@ export default function Item({navigation}){
                 </View>
 
                 <View style={{flex: 1, justifyContent: 'flex-start', alignItems:'flex-start'}}>
-                    <Button mode="contained">
-                        Save
+                    <Button mode="contained" onPress={() => {navigation.navigate('Bid', {item: item, itemID: route.params.fileName, user: user})}}>
+                        Bid
                     </Button>
                     <Text style={styles.itemName}>{item.name + '   ' + item.price + ' €'}</Text>
                     <Text style={styles.itemType}>{"Posted by " + item.owner_name}</Text>

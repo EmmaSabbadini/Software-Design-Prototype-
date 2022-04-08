@@ -13,6 +13,7 @@ import Item from './screens/Item';
 import LoginScreen from './screens/LoginScreen';
 import UserSettings from './screens/UserSettings';
 import EditItem from './screens/EditItem';
+import Bid from './screens/Bid';
 
 const BottomTab = () => {
 
@@ -102,6 +103,11 @@ export default Routes = () => {
           <Stack.Screen
             name = 'UserSettings'
             component={UserSettings}
+            options={{headerShown:false,}}
+          />
+          <Stack.Screen
+            name = 'Bid'
+            component={Bid}
             options={{headerShown:false,}}
           />
         </Stack.Navigator>

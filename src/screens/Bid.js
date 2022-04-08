@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import{db} from '../../firebase';
-import {collection, setDoc} from "firebase/firestore";
+import {collection, addDoc, updateDoc,doc} from "firebase/firestore";
 import { useRoute } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TextInput, View } from 'react-native';
@@ -16,6 +16,10 @@ export default function Bid({navigation} ) {
 
     const addBid = async() => {
 
+        if(item.price > bid){
+            
+        } else {
+
         if(user.uid == item.owner_ID){
             //handle bid on your item
         }
@@ -24,17 +28,21 @@ export default function Bid({navigation} ) {
             //handle price lower than current
         }
 
-        await setDoc(collection(db, 'Items', itemID, 'bids'), {
+        await addDoc(collection(db, 'Items', itemID, 'bids'), {
             bidder_ID: user.uid,
             bidder_name: user.displayName,
             bid: bid
         });
 
-        await setDoc(collection(db,'Items', itemID),{
-            price: bid
+        await updateDoc(doc(db, 'Items' ,itemID),{
+            price: bid,
+            topbidder: user.displayName
         });
-        navigation.navigate('Item',{fileName: itemID});
+    
         
+
+        navigation.navigate('Item',{fileName: itemID});
+        s}
     }
 
     const [bid, setBid] = useState()
