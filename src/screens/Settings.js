@@ -7,6 +7,10 @@ const Separator = () => (
   <View style={styles.separator} />
 );
 
+
+var user = auth.currentUser;
+
+
 export default function LoginScreen({ navigation }) {
 return(
   <SafeAreaView style={styles.container}>

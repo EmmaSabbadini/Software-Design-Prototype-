@@ -14,17 +14,17 @@ import {auth} from "../../firebase"
 
 const user = auth.currentUser;
 if (user !== null) {
-    // The user object has basic properties such as display name, email, etc.
-    var displayName = user.displayName;
-    var email = user.email;
-    var photoURL = user.photoURL;
-    var emailVerified = user.emailVerified;
+  // The user object has basic properties such as display name, email, etc.
+  var displayName = user.displayName;
+  var email = user.email;
   
-    // The user's ID, unique to the Firebase project. Do NOT use
-    // this value to authenticate with your backend server, if
-    // you have one. Use User.getToken() instead.
-    const uid = user.uid;
-  }
+
+  // The user's ID, unique to the Firebase project. Do NOT use
+  // this value to authenticate with your backend server, if
+  // you have one. Use User.getToken() instead.
+  var uid = user.uid;
+}
+
 
 
 const Separator = () => (
@@ -44,24 +44,15 @@ export default function UserSettings({ navigation }) {
     <Separator />
     <View>
       <Text style={styles.title}>
-        Account Information.
+      <Text style={{fontSize: 30, alignSelf: 'center'} }>{'User Information'}</Text>
       </Text>
-      <Text style={styles.title}>
-        Username:
-      </Text>
-      <Text style={styles.title}>
-        Email:
-      </Text>
-      <Button
-        title="Change User Information"
-        onPress={() => navigation.navigate('UserSettings')}
-      />
+      <Text style={{fontSize: 15, alignSelf: 'left'} }>{'Provider-specific UID:' + uid}</Text>
+      <Text style={{fontSize: 15, alignSelf: 'left'} }>{'Account Username: ' + displayName}</Text>
+      <Text style={{fontSize: 15, alignSelf: 'left'} }>{'Account Email Address: ' + email}</Text>
     </View>
     <Separator />
     <View>
-      <Text style={styles.title}>
-        Forgot Password?
-      </Text>
+    <Text style={{fontSize: 15, alignSelf: 'left'} }>{'Password: Forgot password?'}</Text>
       <Button
         title="Reset Password"
         onPress={() => {sendPasswordResetEmail(auth, email).catch((error) => {
@@ -70,24 +61,6 @@ export default function UserSettings({ navigation }) {
           // ..
         }); Alert.alert('Password reset email sent to', email);}}
       />
-    </View>
-    <Separator />
-    <View>
-      <Text style={styles.title}>
-        This layout strategy lets the title define the width of the button.
-      </Text>
-      <View style={styles.fixToText}>
-        <Button
-          title="Sign In"
-          onPress={() => navigation.navigate('LoginScreen')}
-        />
-         <Button
-        title="Sign Out"
-        color="#f194ff"
-        onPress={() => {signOut(auth); Alert.alert('User Signed Out');}
-        }
-       />
-      </View>
     </View>
   </SafeAreaView>
   )
