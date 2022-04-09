@@ -1,20 +1,19 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { TouchableOpacity, StyleSheet, View, SafeAreaView, Platform, StatusBar, Dimensions, ImageBackground } from 'react-native'
 import { Text } from 'react-native-paper'
-import Logo from '../components/Logo'
-import { theme } from '../core/theme'
-import Toast from '../components/Toast'
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { borderLeftColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes'
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-export default function Welcome() {
+export default function Welcome({ navigation }) {
     
     return (
         <View style={styles.background}>     
-            <ImageBackground  style={styles.image} source={require("../assets/furniture_wallpaper.jpg")} resizeMode='stretch'>
+            <ImageBackground  
+                style={styles.image} 
+                source={require("../assets/furniture_wallpaper.jpg")} 
+                resizeMode='repeat'>
             </ImageBackground>
                 <View style={styles.welcomeBox}>
                     <Text style={styles.text1}>Welcome to</Text>
@@ -53,7 +52,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     image: {
-        resizeMode: 'stretch',
         flex: 1,
         top: 0,
         bottom: 0,
@@ -93,23 +91,23 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         backgroundColor: '#000000',
     },
-    text1: {
+    text1: { //Welcome to
         color: "black",
-        fontSize: 34,
+        fontSize: 30,
         textAlign: "center",
     },
-    text2: {
+    text2: { //FurniShare
         color: "black",
         fontSize: 40,
         fontWeight: "bold",
         textAlign: "center",
     },
-    text3: {
+    text3: { //button text
         color: "white",
         fontSize: 18,
         textAlign: "center",
     },
-    text4: {
+    text4: { //button text
         color: "black",
         fontSize: 18,
         textAlign: "center",

@@ -12,6 +12,7 @@ import RegisterScreen from './screens/RegisterScreen';
 import Item from './screens/Item';
 import LoginScreen from './screens/LoginScreen';
 import UserSettings from './screens/UserSettings';
+import Welcome from './screens/Welcome';
 import EditItem from './screens/EditItem';
 import Bid from './screens/Bid';
 
@@ -44,7 +45,11 @@ const BottomTab = () => {
       name = 'RegisterScreen'
       component={RegisterScreen}
       options={{headerShown:false,}}
-    />
+      /><Tab.Screen 
+      name = 'Welcome'
+      component={Welcome}
+      options={{headerShown:false,}}
+      />
     </Tab.Navigator>
   );
 
@@ -106,6 +111,11 @@ export default Routes = () => {
             options={{headerShown:false,}}
           />
           <Stack.Screen
+            name = 'Welcome'
+            component={Welcome}
+            options={{headerShown:false,}}
+          />
+           <Stack.Screen
             name = 'Bid'
             component={Bid}
             options={{headerShown:false,}}
