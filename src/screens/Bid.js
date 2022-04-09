@@ -7,7 +7,6 @@ import { View,StyleSheet, StatusBar,Text, FlatList} from 'react-native';
 import TextInput from '../components/TextInput'
 import Background from '../components/Background'
 import Button from '../components/Button';
-import { async } from '@firebase/util';
 
 class bids {
     constructor (bid, name) {
@@ -77,7 +76,7 @@ export default function Bid({navigation} ) {
         await addDoc(collection(db, 'Items', itemID, 'bids'), {
             bidder_ID: user.uid,
             bidder_name: user.displayName,
-            bid: bid
+            bid: parseFloat(bid)
         });
 
         await updateDoc(doc(db, 'Items' ,itemID),{
