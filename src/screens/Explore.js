@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { ImageBackground, Pressable, StyleSheet, Text, View, FlatList, Dimensions } from 'react-native';
+import { ImageBackground, Pressable, StyleSheet, Text, View, FlatList, Dimensions, StatusBar, ScrollView, } from 'react-native';
 import{db, storage} from '../../firebase';
 import {ref, getDownloadURL } from 'firebase/storage';
 import { doc, getDocs,collection, getDoc } from "firebase/firestore";
+import { render } from 'react-dom';
 
 const numColumns = 2;
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 class ItemFull {
   constructor (id, name, type, imageUrl, price ) {
@@ -72,38 +76,22 @@ export default function Explore({navigation}){
     }
     
     return (
-        <Pressable 
-            onPress={() => {navigation.navigate('Item', {fileName: item.id})}}
-        >    
+        <Pressable
+          onPress={() => {navigation.navigate('Item', {fileName: item.id})}}>  
             <ImageBackground 
-            source={{uri: item.imageUrl}} 
-            style={styles.item} 
-            imageStyle = {{borderRadius: 20}}
-            >
-              
+              source={{uri: item.imageUrl}} 
+              style={styles.item} 
+              imageStyle = {{borderRadius: 20}}
+              >  
             </ImageBackground>
             <View>
-            <Text style={{
-              fontSize: 15,
-              color: 'grey',
-              margin: Dimensions.get('window').width * 0.025,
-              }}>{item.name}
-            </Text>
-
-            
-            <Text style={{
-              fontSize: 15,
-              color: 'black',
-              margin: Dimensions.get('window').width * 0.025,
-              }}>{item.price + ' €'}
-            </Text>
+              <Text style={styles.itemText}>{item.name}</Text>
+              <Text style={styles.priceText}>{'€' + item.price}</Text>
             </View>
-            
-        </Pressable>
-        );
-
-  };
-
+        </Pressable> 
+      );
+    }
+  
   //part which renders the actual item list
   if(!items){
     getItems();
@@ -120,39 +108,50 @@ export default function Explore({navigation}){
       />
   );
   }
-  
   //console.log(items);
-  //TODO replace this with loadng screen
-  return(<View><Text>bread</Text></View>);
-  
-
-}
+  return (
+    <View style={styles.iconBar}>
+      <Text>FurniShare</Text> 
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#dadada',
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 20,
     alignSelf: 'center',
   },
+  itemBar: {
+    paddingTop: 60,
+    width: windowWidth,
+  },
   item: {
-    backgroundColor: 'lightgrey',
     justifyContent: 'center',
     flex: 1,
     borderRadius: 20,
+    margin: windowWidth* 0.025,
+    height: windowWidth  / numColumns, // approximate a square
+    width: windowWidth * 0.45,
+  },
+  itemText: {
+    paddingBottom: 10,
+    fontSize: 15,
+    color: 'grey',
     margin: Dimensions.get('window').width * 0.025,
-    height: Dimensions.get('window').width  / numColumns, // approximate a square
-    width: Dimensions.get('window').width * 0.45,
-  },
-  itemText: {
-    
 
   },
-
   itemInvisible: {
-        backgroundColor: '#012E40',
+    backgroundColor: '#012E40',
   },
-  itemText: {
-    color: '#fff',
-    alignSelf: 'center',
+  priceText: {
+    position: 'absolute',
+    top: 15,
+    fontSize: 18,
+    color: 'black',
+    fontWeight: 'bold',
+    margin: Dimensions.get('window').width * 0.025,
   },
 
 });

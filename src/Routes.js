@@ -11,6 +11,8 @@ import AddItem from './screens/AddItem';
 import RegisterScreen from './screens/RegisterScreen';
 import Item from './screens/Item';
 import LoginScreen from './screens/LoginScreen';
+import UserSettings from './screens/UserSettings';
+import Welcome from './screens/Welcome';
 
 const BottomTab = () => {
 
@@ -41,7 +43,11 @@ const BottomTab = () => {
       name = 'RegisterScreen'
       component={RegisterScreen}
       options={{headerShown:false,}}
-    />
+      /><Tab.Screen 
+      name = 'Welcome'
+      component={Welcome}
+      options={{headerShown:false,}}
+      />
     </Tab.Navigator>
   );
 
@@ -93,6 +99,19 @@ export default Routes = () => {
             component={AddItem}
             options={{headerShown:false,}}
           />
+<<<<<<< Updated upstream
+=======
+          <Stack.Screen
+            name = 'UserSettings'
+            component={UserSettings}
+            options={{headerShown:false,}}
+          />
+          <Stack.Screen
+            name = 'Welcome'
+            component={Welcome}
+            options={{headerShown:false,}}
+          />
+>>>>>>> Stashed changes
         </Stack.Navigator>
       </NavigationContainer>
     )
