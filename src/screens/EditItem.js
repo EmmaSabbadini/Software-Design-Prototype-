@@ -8,8 +8,7 @@ import { useRoute } from "@react-navigation/native";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useNavigation } from '@react-navigation/native';
 
-const auth = getAuth();
-uid = "0";
+ 
 
 //Class template for the item fetching from firestore
 class item {
@@ -50,30 +49,18 @@ const itemConverter = {
 
 //The screen designed to be invoked with objectID to fetch it from the database (route.params.filename)
 
-export default function Item({navigation}){
+export default function EditItem(){
     //handle image url request from firestore
     const[image, setImage] = useState();
     const[item, setItem] = useState();
-    const[user, setUser] = useState();
     const route = useRoute();
 
-    const auth = getAuth();
-   onAuthStateChanged(auth, (user) => {
-     if (user) {
-      uid = user.uid;
-      setUser(user)
-      console.log(uid);
-    
-     } else {
-       console.log("No user\n");
-    }
-});
+     
+     
     
     const getData = async() => {
-        console.log("trying to access " + route.params.fileName);
-         id = route.params.fileName;
-         console.log(id);
-        const docRef = doc(db, "Items", route.params.fileName).withConverter(itemConverter);
+        //console.log("trying to access " + route.params.fileName);
+        const docRef = doc(db, "Items", id).withConverter(itemConverter);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
             // Convert to City object
@@ -110,29 +97,7 @@ export default function Item({navigation}){
 
         
             
-         if (item.owner_ID == uid){
-            
-
-            return(
-                <SafeAreaView style={styles.container}>
-                    <View style={{flex: 1}}>
-                        <Image source={{uri: image}} style={styles.image}/>
-                    </View>
-    
-                    <View style={{flex: 1, justifyContent: 'flex-start', alignItems:'flex-start'}}>
-                        <Button mode="contained">
-                            Save
-                        </Button>
-                        <Button mode = 'contained' onPress={() => {navigation.navigate('EditItem', {id})}}> Edit</Button>
-                        <Text style={styles.itemName}>{item.name + '   ' + item.price + ' €'}</Text>
-                        <Text style={styles.itemType}>{"Posted by " + item.owner_name}</Text>
-                        <Text style={styles.itemType}>{item.type}</Text>
-                        <Text style={styles.itemDesc}>{item.desc}</Text>
-                    </View>  
-                </SafeAreaView>
-            );
-         } else {
-        //TODO - make it look good ;)
+          
         return(
             <SafeAreaView style={styles.container}>
                 <View style={{flex: 1}}>
@@ -140,17 +105,13 @@ export default function Item({navigation}){
                 </View>
 
                 <View style={{flex: 1, justifyContent: 'flex-start', alignItems:'flex-start'}}>
-                    <Button mode="contained" onPress={() => {navigation.navigate('Bid', {item: item, itemID: route.params.fileName, user: user})}}>
-                        Bid
-                    </Button>
-                    <Text style={styles.itemName}>{item.name + '   ' + item.price + ' €'}</Text>
-                    <Text style={styles.itemType}>{"Posted by " + item.owner_name}</Text>
-                    <Text style={styles.itemType}>{item.type}</Text>
-                    <Text style={styles.itemDesc}>{item.desc}</Text>
+                
+                <Text style={{fontSize: 30, textAlignVertical: 'center', textAlign: 'center'}}>Edit Items!</Text>
+
                 </View>  
             </SafeAreaView>
         );
-     }
+     
     }
 
 }
