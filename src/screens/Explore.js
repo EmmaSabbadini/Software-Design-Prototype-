@@ -4,6 +4,7 @@ import{db, storage} from '../../firebase';
 import {ref, getDownloadURL } from 'firebase/storage';
 import { doc, getDocs,collection, getDoc } from "firebase/firestore";
 import { render } from 'react-dom';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const numColumns = 2;
 
@@ -98,7 +99,7 @@ export default function Explore({navigation}){
   } else {
     console.log(items);
     return (
-      <FlatList
+        <FlatList
           data={items}
           style={styles.container}
           renderItem={renderItem}
@@ -106,6 +107,7 @@ export default function Explore({navigation}){
           refreshing = {false}
           onRefresh = {getItems} //get items data again for refresh
       />
+      
   );
   }
   //console.log(items);

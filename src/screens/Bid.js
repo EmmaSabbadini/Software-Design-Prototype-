@@ -80,7 +80,7 @@ export default function Bid({navigation} ) {
         });
 
         await updateDoc(doc(db, 'Items' ,itemID),{
-            price: bid,
+            price: parseFloat(bid),
             topbidder: user.displayName
         });
     
