@@ -111,7 +111,7 @@ export default function Explore({navigation}){
   //console.log(items);
   return (
     <View style={styles.iconBar}>
-      <Text>FurniShare</Text> 
+      <Text></Text> 
     </View>
   );
 };

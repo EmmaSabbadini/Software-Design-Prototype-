@@ -1,6 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView, View, Dimensions, Text, StyleSheet, StatusBar, LogBox, IconButton, Entypo, TouchableOpacity, Image, } from 'react-native';
-import { ImageBackground, SafeAreaView, View, Text, StyleSheet, StatusBar} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {onAuthStateChanged } from "firebase/auth";
@@ -52,7 +51,7 @@ export default function User({ goBack}){
         return (
             <View style = {styles.userbox}>
                 <TouchableOpacity
-                    onPress={goBack}
+                    
                     style={styles.icon}>
                     <Icon name={"chevron-left"}  size={20} color="black"/>
                 </TouchableOpacity>
@@ -97,7 +96,6 @@ export default function User({ goBack}){
 const styles = StyleSheet.create({
     userbox: {
         justifyContent: 'center',
-        marginVertical: '50%',
         paddingTop: StatusBar.currentHeight,
         flex: 1,
         backgroundColor: '#DADADA',
