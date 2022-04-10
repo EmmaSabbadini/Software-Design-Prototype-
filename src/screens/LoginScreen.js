@@ -39,8 +39,8 @@ export default function LoginScreen({ navigation }) {
     <Background>
       <BackButton goBack={navigation.goBack} />
       <Logo />
-      <Header> Hello !</Header>
-      <Header>Welcome back.</Header>
+      <Header style={styles.ln1}> Hello !</Header>
+      <Header style={styles.ln2}>Welcome back.</Header>
 
       <View style={{
         marginLeft: 3,
@@ -123,6 +123,21 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
   },
+  ln1:{
+      fontFamily: "Merriweather",
+
+    fontSize: 21,
+    color: theme.colors.primary,
+    paddingVertical: 12,
+  },
+  ln2:{
+    fontFamily: "Merriweather-bold",
+
+    fontSize: 21,
+    color: theme.colors.primary,
+    paddingVertical: 12,
+  },
+
   forgotPassword: {
     width: "100%",
     alignItems: "center",
