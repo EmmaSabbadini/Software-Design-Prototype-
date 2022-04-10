@@ -50,16 +50,15 @@ export default function User({ goBack}){
 
     if (user){
         return (
+            <SafeAreaView>
+            <Image style={styles.profile_img} source={{uri: "https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"}}/>
             <View style = {styles.userbox}>
-                <TouchableOpacity
-                    
-                    style={styles.icon}>
-                    <Icon name={"chevron-left"}  size={20} color="black"/>
-                </TouchableOpacity>
-                <Image style={styles.profile_img} source={{uri: "https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"}}/>
-                <Text style={styles.header}> Profile </Text>
-                <UserInfo title={name} subtitle={email}/>
-                    <View style={styles.screenContainer}>
+                <View>
+                    <Text style={styles.header}> Profile </Text>
+                    <UserInfo title={name} subtitle={email}/>
+                </View>
+                
+                <View style={styles.screenContainer}>
                         <AppButton 
                             icon="chevron-right" 
                             title="My Orders"
@@ -80,8 +79,10 @@ export default function User({ goBack}){
                             title="Settings"   
                             subtitle="Notifications, Password, Contacts" 
                             backgroundColor="#7D7D7D"/>
-                    </View>
+                </View>
             </View>
+            </SafeAreaView>
+            
         );
     } else {
         return(
