@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { TouchableOpacity, StyleSheet, View } from "react-native";
+import { TouchableOpacity, StyleSheet, View, Pressable } from "react-native";
+import { Center } from 'native-base'
 import { Text } from "react-native-paper";
 import Background from "../components/Background";
 import Logo from "../components/Logo";
@@ -10,6 +11,7 @@ import BackButton from "../components/BackButton";
 import { theme } from "../core/theme";
 import Toast from "../components/Toast";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { auth } from "../../firebase";
 
@@ -18,6 +20,10 @@ export default function LoginScreen({ navigation }) {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState();
   const [error, setError] = useState();
+  const [passwordVisibility, setPasswordVisibility] = useState(true);
+  const [rightIcon, setRightIcon] = useState('eye');
+
+
 
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
@@ -35,6 +41,13 @@ export default function LoginScreen({ navigation }) {
       <Logo />
       <Header> Hello !</Header>
       <Header>Welcome back.</Header>
+
+      <View style={{
+        marginLeft: 3,
+        width: '100%',
+        
+      }}>
+
       <TextInput
         label="Email"
         returnKeyType="next"
@@ -46,8 +59,31 @@ export default function LoginScreen({ navigation }) {
         autoCompleteType="email"
         textContentType="emailAddress"
         keyboardType="email-address"
-        style={styles.inputContainer}
-      />
+        style={{
+          width: '100%',
+          
+  backgroundColor: theme.colors.surface,
+        }}
+        />
+        </View>
+
+        <View style={styles.inputContainer}>
+        <View style={{
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginLeft: 3
+        }}>
+
+        <TouchableOpacity onPress={() =>{
+          setPasswordVisibility(!passwordVisibility)
+          if(passwordVisibility)
+          setRightIcon('eye-off')
+          else
+          setRightIcon('eye')
+        }}>
+          <MaterialCommunityIcons name={rightIcon} size={22} color="#232323"/>
+        </TouchableOpacity>
+          </View>
       <TextInput
         label="Password"
         returnKeyType="done"
@@ -55,22 +91,24 @@ export default function LoginScreen({ navigation }) {
         onChangeText={setPassword}
         error={!!password.error}
         errorText={password.error}
-        secureTextEntry
-        style={styles.inputContainer}
-      />
+        secureTextEntry={passwordVisibility}
+        />
+
+      </View>
       <View style={styles.forgotPassword}>
         <TouchableOpacity
           onPress={() => navigation.navigate("ResetPasswordScreen")}
         >
-          <Text style={styles.forgot}>Forgot Password</Text>
+          <Text style={styles.forgot}>Forgot Password ?</Text>
         </TouchableOpacity>
       </View>
-      <Button loading={loading} mode="contained" onPress={handleLogin}>
+      <Button loading={loading} mode="contained" onPress={handleLogin} style={styles.btn}>
         Login
       </Button>
       <Button
         mode="outlined"
         onPress={() => navigation.navigate("RegisterScreen")}
+        style={styles.btn}
       >
         SIGN UP
       </Button>
@@ -106,12 +144,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   inputContainer: {
-    padding: 1,
-    marginLeft: 5,
-    backgroundColor: theme.colors.surface,
-    borderBottomColor: "#000",
-    // borderBottomWidth: 1,
+  flexDirection: 'row-reverse',
+  backgroundColor: theme.colors.surface,
 
-    margin: 5,
   },
+  btn:{
+    borderWidth: 1,
+    borderRadius: 20,
+  }
 });
