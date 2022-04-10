@@ -84,7 +84,7 @@ export default function EditItem({navigation}){
 
    const deleteItem = async() => {
      
-    //Need to Update database with price, name, desc, itemType here
+    
     await deleteDoc(doc(db, 'Items' , id),);
    navigation.navigate('Explore');
 } 
