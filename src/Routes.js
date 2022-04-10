@@ -23,30 +23,50 @@ const BottomTab = () => {
       <Tab.Screen 
         name = 'Explore'
         component={Explore}
-        options={{headerShown:false,}}
+        options={{
+          tabBarLabel: 'Explore',
+          tabBarIcon: ({}) => ('./assets/icons/search_icon.png'),
+        }}
       />
       <Tab.Screen 
         name = 'User'
         component={User}
-        options={{headerShown:false,}}
+        options={{
+          tabBarLabel: 'User',
+          tabBarIcon: ({}) => ('./assets/icons/user_icon.png'),
+        }}
       />
       <Tab.Screen 
         name = 'Settings'
         component={Settings}
-        options={{headerShown:false,}}
+        options={{
+          tabBarLabel: 'Settings',
+          tabBarIcon: ({}) => ('./assets/icons/settings_icon.png'),
+        }}
       />
       <Tab.Screen 
         name = 'Login'
         component={Login}
-        options={{headerShown:false,}}
-      /><Tab.Screen 
+        options={{
+          tabBarLabel: 'Login',
+          tabBarIcon: ({}) => ('./assets/icons/user_icon.png'),
+        }}
+      />
+      <Tab.Screen 
       name = 'RegisterScreen'
       component={RegisterScreen}
-      options={{headerShown:false,}}
-      /><Tab.Screen 
+      options={{
+        tabBarLabel: 'Register',
+        tabBarIcon: ({}) => ('./assets/icons/user_icon.png'),
+      }}
+      />
+      <Tab.Screen 
       name = 'Welcome'
       component={Welcome}
-      options={{headerShown:false,}}
+      options={{
+        tabBarLabel: 'Welcome',
+        tabBarIcon: ({}) => ('./assets/icons/home_icon.png'),
+      }}
       />
     </Tab.Navigator>
   );
