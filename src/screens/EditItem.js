@@ -1,5 +1,5 @@
 import {ref, getDownloadURL } from 'firebase/storage';
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc, collection } from "firebase/firestore";
 import React, { useState, useEffect } from 'react'
 import {Image, Text, KeyboardAvoidingView, SafeAreaView, View,TextInput,StyleSheet,Dimensions,StatusBar} from 'react-native'
 import Button from '../components/Button';
@@ -9,7 +9,6 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useNavigation } from '@react-navigation/native';
 
  
-
 class item {
     constructor (owner_name ,name, type, desc, imageUrl, price, owner_ID) {
         this.owner_name = owner_name;
@@ -71,13 +70,17 @@ export default function EditItem({navigation}){
           }
     }
 
-    /*const updateDatabase = async() => {
-         
-
+    const updateDatabase = async() => {
+     
         //Need to Update database with price, name, desc, itemType here
-
+        await updateDoc(doc(db, 'Items' , id),{
+            price: price,
+            name: name,
+            itemType: itemType,
+            desc: desc
+        });
        navigation.navigate('Explore');
-   } */
+   } 
 
     if(!item){
         getData();
@@ -106,7 +109,7 @@ export default function EditItem({navigation}){
 
                 <View style={{flex: 1, justifyContent: 'flex-start', alignItems:'flex-start'}}>
                 
-                <Text style={{fontSize: 30, textAlignVertical: 'center', textAlign: 'center'}}>Edit Items:</Text>
+                <Text style={{fontSize: 30, textAlignVertical: 'center', textAlign: 'center'}}>Edit Item:</Text>
                 <TextInput
                         style={styles.textBox}
                         onChangeText={setName}
@@ -131,7 +134,9 @@ export default function EditItem({navigation}){
                         value={price}
                         placeholder ='Price'
                     />
-                  <Button mode = 'contained' onPress={() => {navigation.navigate('Explore')}}> Done</Button>
+                 <Button mode="contained" onPress={updateDatabase}>
+                        Done
+                    </Button>
                 </View>  
             </SafeAreaView>
         );
