@@ -1,5 +1,5 @@
 import {ref, getDownloadURL } from 'firebase/storage';
-import { doc, getDoc, updateDoc, collection } from "firebase/firestore";
+import { doc, getDoc, updateDoc, collection ,deleteDoc} from "firebase/firestore";
 import React, { useState, useEffect } from 'react'
 import {Image, Text, KeyboardAvoidingView, SafeAreaView, View,TextInput,StyleSheet,Dimensions,StatusBar} from 'react-native'
 import Button from '../components/Button';
@@ -82,6 +82,13 @@ export default function EditItem({navigation}){
        navigation.navigate('Explore');
    } 
 
+   const deleteItem = async() => {
+     
+    //Need to Update database with price, name, desc, itemType here
+    await deleteDoc(doc(db, 'Items' , id),);
+   navigation.navigate('Explore');
+} 
+
     if(!item){
         getData();
 
@@ -134,7 +141,12 @@ export default function EditItem({navigation}){
                         value={price}
                         placeholder ='Price'
                     />
-                 <Button mode="contained" onPress={updateDatabase}>
+                   <Button mode="contained" 
+                 onPress={deleteItem}>
+                        Delete 
+                    </Button>
+                 <Button mode="contained" 
+                 onPress={updateDatabase}>
                         Done
                     </Button>
                 </View>  
