@@ -1,10 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
-<<<<<<< Updated upstream
-import Button from '../components/Button';
-import { ImageBackground, SafeAreaView, View, Text, StyleSheet} from 'react-native';
-=======
 import { SafeAreaView, View, Dimensions, Text, StyleSheet, StatusBar, LogBox, IconButton, Entypo, TouchableOpacity, Image, } from 'react-native';
->>>>>>> Stashed changes
+import { ImageBackground, SafeAreaView, View, Text, StyleSheet, StatusBar} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {onAuthStateChanged } from "firebase/auth";
@@ -100,10 +96,8 @@ export default function User({ goBack}){
 
 const styles = StyleSheet.create({
     userbox: {
-<<<<<<< Updated upstream
         justifyContent: 'center',
         marginVertical: '50%',
-=======
         paddingTop: StatusBar.currentHeight,
         flex: 1,
         backgroundColor: '#DADADA',
@@ -174,6 +168,5 @@ const styles = StyleSheet.create({
         width: 100, 
         height: 100, 
         borderRadius: 200/2,
->>>>>>> Stashed changes
     },   
 });

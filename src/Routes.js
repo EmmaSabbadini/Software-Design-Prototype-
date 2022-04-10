@@ -13,6 +13,8 @@ import Item from './screens/Item';
 import LoginScreen from './screens/LoginScreen';
 import UserSettings from './screens/UserSettings';
 import Welcome from './screens/Welcome';
+import EditItem from './screens/EditItem';
+import Bid from './screens/Bid';
 
 const BottomTab = () => {
 
@@ -75,7 +77,6 @@ const BottomTab = () => {
 
 export default Routes = () => {
     const Stack = createNativeStackNavigator()
-
     return (
       <NavigationContainer >
         <Stack.Navigator initialRouteName="Home">
@@ -119,8 +120,11 @@ export default Routes = () => {
             component={AddItem}
             options={{headerShown:false,}}
           />
-<<<<<<< Updated upstream
-=======
+          <Stack.Screen
+            name = 'EditItem'
+            component={EditItem}
+            options={{headerShown:false,}}
+          />
           <Stack.Screen
             name = 'UserSettings'
             component={UserSettings}
@@ -131,9 +135,12 @@ export default Routes = () => {
             component={Welcome}
             options={{headerShown:false,}}
           />
->>>>>>> Stashed changes
+           <Stack.Screen
+            name = 'Bid'
+            component={Bid}
+            options={{headerShown:false,}}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     )
   }
-

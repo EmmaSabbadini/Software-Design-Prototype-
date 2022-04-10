@@ -3,14 +3,58 @@ import { StyleSheet, Button, View, SafeAreaView, Text, Alert, StatusBar } from '
 import {auth} from "../../firebase"
 import { getAuth, signInWithPhoneNumber, signOut } from "firebase/auth";
 
-const Settings = () => {
-    return (
+const Separator = () => (
+  <View style={styles.separator} />
+);
 
-        <View style={{alignSelf:'center', marginVertical:'50%'}}>
-            <Text style={{alignSelf:'center', textAlign:'center', }}> Settings Screen skeleton</Text>
-        </View>
 
-    );
+var user = auth.currentUser;
+
+
+export default function LoginScreen({ navigation }) {
+return(
+  <SafeAreaView style={styles.container}>
+    <View>
+      <Text style={styles.title}>
+        Account Settings for User. Use these functions to change user name, passwords, and general account privacy settings. 
+      </Text>
+      <Button
+        title="Change User Information"
+        onPress={() => navigation.navigate('UserSettings')}
+      />
+    </View>
+    <Separator />
+    <View>
+      <Text style={styles.title}>
+        Display Settings. 
+      </Text>
+      <Button
+        title="Press me"
+        color="#f194ff"
+        onPress={() => Alert.alert('Button with adjusted color pressed')}
+      />
+    </View>
+    <Separator />
+    <View>
+      <Text style={styles.title}>
+        This layout strategy lets the title define the width of the button.
+      </Text>
+      <View style={styles.fixToText}>
+        <Button
+          title="Sign In"
+          onPress={() => navigation.navigate('LoginScreen')}
+        />
+         <Button
+        title="Sign Out"
+        color="#f194ff"
+        onPress={() => {signOut(auth); Alert.alert('User Signed Out');}
+        }
+       />
+      </View>
+    </View>
+  </SafeAreaView>
+
+);
 }
 
 const styles = StyleSheet.create({
