@@ -64,15 +64,9 @@ export default function Bid({navigation} ) {
 
         if(item.price > bid){
             
+        } else if(user.uid == item.owner_ID){
+            
         } else {
-
-        if(user.uid == item.owner_ID){
-            //handle bid on your item
-        }
-
-        if(bid < item.price) {
-            //handle price lower than current
-        }
 
         await addDoc(collection(db, 'Items', itemID, 'bids'), {
             bidder_ID: user.uid,
@@ -89,7 +83,7 @@ export default function Bid({navigation} ) {
         
 
         navigation.navigate('Item',{fileName: itemID});
-        s}
+        }
     }
 
     if(!otherBids){
@@ -101,26 +95,40 @@ export default function Bid({navigation} ) {
             </Background>
             );
     } else if(otherBids){
-        console.log(otherBids)
-        return(
+        if(user.uid == item.owner_ID){
+            return(
 
-            <Background>
+                <Background>
+                    
+                    <FlatList
+                        data = {otherBids}
+                        renderItem = {renderItem}
+                    />
+                </Background>
                 
-                <TextInput
-                            onChangeText={setBid}
-                            value={bid}
-                            placeholder ='Your bid'
-                />
-                <Button mode="contained" onPress={addBid}>
-                    Bid
-                </Button>
-                <FlatList
-                    data = {otherBids}
-                    renderItem = {renderItem}
-                />
-            </Background>
-            
-        )
+            )
+        } else {
+            return(
+
+                <Background>
+                    
+                    <TextInput
+                                onChangeText={setBid}
+                                value={bid}
+                                placeholder ='Your bid'
+                    />
+                    <Button mode="contained" onPress={addBid}>
+                        Bid
+                    </Button>
+                    <FlatList
+                        data = {otherBids}
+                        renderItem = {renderItem}
+                    />
+                </Background>
+                
+            )
+        }
+        
     }
 
     return(
