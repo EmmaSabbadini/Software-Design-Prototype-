@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { StyleSheet, Image, View, TouchableOpacity, Text, } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -22,7 +23,7 @@ const BottomTab = () => {
 
   return(
     <Tab.Navigator>
-      <Tab.Screen 
+      <Tab.Screen
         name = 'User'
         component={User}
         options={{headerShown:false,}}
@@ -116,3 +117,10 @@ export default Routes = () => {
       </NavigationContainer>
     )
   }
+
+const styles = StyleSheet.create({
+    icon: {
+      height: 22,
+      width: 22,
+    },
+})

@@ -1,7 +1,6 @@
 import React from 'react'
 import { TouchableOpacity, StyleSheet, View, SafeAreaView, Platform, StatusBar, Dimensions, ImageBackground } from 'react-native'
 import { Text } from 'react-native-paper'
-import { signInWithEmailAndPassword } from "firebase/auth";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
