@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import {ref, getDownloadURL } from 'firebase/storage';
-import { SafeAreaView, View, Dimensions, Text, StyleSheet, StatusBar, LogBox, IconButton, Entypo, TouchableOpacity, Image, Pressable} from 'react-native';
+import { SafeAreaView, View, Dimensions, Text, StyleSheet, StatusBar, LogBox, Button, Entypo, TouchableOpacity, Image, Pressable} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { theme } from '../core/theme'
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -79,7 +79,8 @@ export default function User({navigation}){
                         <AppButton 
                             icon="chevron-right" 
                             title="Settings"   
-                            subtitle="Notifications, Password, Contacts" 
+                            subtitle="Account, Notifications, Appearance..." 
+                            onPress={() => navigation.navigate('Settings')}
                             backgroundColor="#7D7D7D"/>
                         <AppButton 
                             icon="chevron-right" 
