@@ -1,17 +1,18 @@
 import { useNavigation } from '@react-navigation/native';
-import { SafeAreaView, View, Dimensions, Text, StyleSheet, StatusBar, LogBox, IconButton, Entypo, TouchableOpacity, Image, } from 'react-native';
+import {ref, getDownloadURL } from 'firebase/storage';
+import { SafeAreaView, View, Dimensions, Text, StyleSheet, StatusBar, LogBox, IconButton, Entypo, TouchableOpacity, Image, Pressable} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { theme } from '../core/theme'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {onAuthStateChanged } from "firebase/auth";
-import {auth} from '../../firebase'
+import {storage,auth} from '../../firebase'
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const AppButton = ({ onPress, icon, title, subtitle, backgroundColor, navigation }) => (
-  <View style={styles.appButtonContainer}>
+  <Pressable style={styles.appButtonContainer}>
     <Icon.Button
       flexDirection= 'row-reverse'
       color='black'
@@ -22,7 +23,7 @@ const AppButton = ({ onPress, icon, title, subtitle, backgroundColor, navigation
       <Text style={styles.appButtonText}>{title}</Text>
       <Text style={styles.appButtonDescText}>{subtitle}</Text>
     </Icon.Button>
-  </View>
+  </Pressable>
 );
 
 const UserInfo = ({title, subtitle}) => (
@@ -33,16 +34,22 @@ const UserInfo = ({title, subtitle}) => (
 );
 
 //TODO -fetch user data and profile pic(would look similar to item fetching in explore.js) 
-export default function User({ goBack}){
+export default function User({navigation}){
     const[user, setUser] = useState();
     const[name, setName] = useState();
     const[email, setEmail] = useState();
+    const[imageUrl, setImageUrl] = useState();
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
-          setUser(user)
-          setName(user.displayName)
-          setEmail(user.email)
+            setUser(user)
+            setName(user.displayName)
+            setEmail(user.email)
+            if(user.photoURL){
+                imageRef = ref(storage, `${user.photoURL}.jpeg`)
+                getDownloadURL(imageRef)
+                .then((url)=>{setImage(url);});
+            }
         } else {
     
         }
@@ -51,7 +58,7 @@ export default function User({ goBack}){
     if (user){
         return (
             <SafeAreaView>
-            <Image style={styles.profile_img} source={{uri: "https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"}}/>
+            <Image style={styles.profile_img} source={{uri: imageUrl}}/>
             <View style = {styles.userbox}>
                 <View>
                     <Text style={styles.header}> Profile </Text>
@@ -61,7 +68,7 @@ export default function User({ goBack}){
                 <View style={styles.screenContainer}>
                         <AppButton 
                             icon="chevron-right" 
-                            title="My Orders"
+                            title="Saved Items"
                             subtitle="Check Orders" 
                             backgroundColor="#7D7D7D"/>
                         <AppButton 
@@ -71,14 +78,15 @@ export default function User({ goBack}){
                             backgroundColor="#7D7D7D"/>
                         <AppButton 
                             icon="chevron-right" 
-                            title="My Reviews" 
-                            subtitle="Check Reviews"  
-                            backgroundColor="#7D7D7D"/>
-                        <AppButton 
-                            icon="chevron-right" 
                             title="Settings"   
                             subtitle="Notifications, Password, Contacts" 
                             backgroundColor="#7D7D7D"/>
+                        <AppButton 
+                            icon="chevron-right" 
+                            title="Add Item"   
+                            subtitle="Post your item for the world to see!" 
+                            onPress={() => {navigation.navigate('AddItem')}}
+                            backgroundColor="#FFFFFF"/>
                 </View>
             </View>
             </SafeAreaView>
