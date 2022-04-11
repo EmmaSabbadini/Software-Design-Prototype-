@@ -77,5 +77,15 @@ const styles = StyleSheet.create({
     borderBottomColor: '#737373',
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
+  profile_img: {
+    position: 'absolute',
+    borderWidth:3,
+    borderColor:'#ffffff',
+    top: 90,
+    left: 20,
+    width: 100, 
+    height: 100, 
+    borderRadius: 200/2,
+}   
 });
 
