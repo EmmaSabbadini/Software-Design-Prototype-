@@ -213,10 +213,7 @@ const styles = StyleSheet.create({
     button: {
       backgroundColor: 'grey',
       width: 260,
-      shadowOpacity: 0.8,
       elevation: 6,
-      shadowRadius: 30 ,
-      shadowOffset : { width: 1, height: 13},
 
     },
     imageBox: {

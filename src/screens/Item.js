@@ -128,8 +128,8 @@ export default function Item({navigation}){
                     </View>
     
                     <View style={{flex: 1, justifyContent: 'flex-start', alignItems:'flex-start'}}>
-                        <Button mode = 'contained' onPress={() => {navigation.navigate('EditItem', {id})}}> Edit</Button>
-                        <Button mode = 'contained' onPress={() => {navigation.navigate('Bid', {item: item, itemID: route.params.fileName, user: user})}}> See current bids</Button>
+                        <Button style={styles.button} mode = 'contained' onPress={() => {navigation.navigate('EditItem', {id})}}> Edit</Button>
+                        <Button style={styles.button} mode = 'contained' onPress={() => {navigation.navigate('Bid', {item: item, itemID: route.params.fileName, user: user})}}> See current bids</Button>
                         <Text style={styles.itemName}>{item.name + '   ' + item.price + ' €'}</Text>
                         <Text style={styles.itemType}>{"Posted by " + item.owner_name}</Text>
                         <Text style={styles.itemType}>{item.type}</Text>
@@ -146,7 +146,7 @@ export default function Item({navigation}){
                 </View>
 
                 <View style={{flex: 1, justifyContent: 'flex-start', alignItems:'flex-start'}}>
-                    <Button mode="contained" onPress={() => {navigation.navigate('Bid', {item: item, itemID: route.params.fileName, user: user})}}>
+                    <Button style={styles.button} mode="contained" onPress={() => {navigation.navigate('Bid', {item: item, itemID: route.params.fileName, user: user})}}>
                         Bid
                     </Button>
                     <Text style={styles.itemName}>{item.name + '   ' + item.price + ' €'}</Text>
@@ -200,5 +200,13 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
 
     },   
+
+    button: {
+        backgroundColor: 'grey',
+        alignSelf: 'center',
+        width: '90%',
+        elevation: 6,
+  
+      },
 
 })

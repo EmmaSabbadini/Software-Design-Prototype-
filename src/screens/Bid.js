@@ -52,7 +52,7 @@ export default function Bid({navigation} ) {
         }
         console.log(item)
         return (
-            <Button mode="contained" onPress={() => {navigation.navigate('CheckBid', {bid: item.bid, bidder_name: item.bidder_name, bidder_email: item.bidder_email})}}>
+            <Button style={styles.button} mode="contained" onPress={() => {navigation.navigate('CheckBid', {bid: item.bid, bidder_name: item.bidder_name, bidder_email: item.bidder_email})}}>
                 { item.bid + '€ : ' + item.bidder_name} 
             </Button>
             
@@ -117,7 +117,7 @@ export default function Bid({navigation} ) {
                                 value={bid}
                                 placeholder ='Your bid'
                     />
-                    <Button mode="contained" onPress={addBid}>
+                    <Button style={styles.button} mode="contained" onPress={addBid} >
                         Bid
                     </Button>
                     <FlatList
@@ -138,7 +138,7 @@ export default function Bid({navigation} ) {
                             value={bid}
                             placeholder ='Your bid'
                 />
-                <Button mode="contained" onPress={addBid}>
+                <Button style={styles.button} mode="contained" onPress={addBid}>
                     Bid
                 </Button>
         </Background>
@@ -160,4 +160,11 @@ const styles = StyleSheet.create({
     bidderText: {
         fontSize: 20,
     },
+
+    button: {
+        backgroundColor: 'grey',
+        width: 260,
+        elevation: 6,
+  
+      },
 });
