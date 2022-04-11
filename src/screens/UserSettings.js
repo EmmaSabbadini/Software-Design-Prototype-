@@ -139,9 +139,9 @@ export default function AddItem({navigation}){
                 ></Image>
                 <View>
                   <Text style={styles.header}>User Settings</Text>
-                 <Text >{'Provider-specific UID:\n' + user.uid}</Text>
-                 <Text >{'Account Username: ' + user.displayName}</Text>
-                  <Text  >{'Account Email Address: ' + user.email}</Text>
+                  <Text style={styles.text}>{'Provider-specific UID:\n' + user.uid}</Text>
+                  <Text style={styles.text}>{'Account Username: ' + user.displayName}</Text>
+                  <Text style={styles.text}>{'Account Email Address: ' + user.email}</Text>
                 </View>
                  <TextInput
                   label="Email"
@@ -203,6 +203,11 @@ export default function AddItem({navigation}){
 
 
 const styles = StyleSheet.create({
+  container: {
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }, 
   header: {
     textAlign: 'center',
     padding: 20,
@@ -220,40 +225,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    textBox:{
-        flex: 1,
-        fontSize: 30,
-    },
-    longtextBox:{
-        textAlignVertical: 'top',
-        flex: 2,
-        fontSize: 30,
-    },
     image:{
       width: 100,
       height: 100,
     },
-    container: {
-        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 20,
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },   
-    forgotPassword: {
-      width: '100%',
-      alignItems: 'flex-end',
-      marginBottom: 12,
-    },
-    row: {
-      flexDirection: 'row',
-      marginTop: 4,
-    },
-    forgot: {
-      fontSize: 13,
-      color: theme.colors.secondary,
-    },
-    link: {
-      fontWeight: 'bold',
-      color: theme.colors.primary,
-    },
+    text: {
+      fontSize: 16,
+      padding: 5,
+    },  
 })
