@@ -14,6 +14,8 @@ import LoginScreen from './screens/LoginScreen';
 import UserSettings from './screens/UserSettings';
 import EditItem from './screens/EditItem';
 import Bid from './screens/Bid';
+import MyItems from './screens/myitems';
+
 
 const BottomTab = () => {
 
@@ -110,6 +112,12 @@ export default Routes = () => {
             component={Bid}
             options={{headerShown:false,}}
           />
+          <Stack.Screen
+            name = 'MyItems'
+            component={MyItems}
+            options={{headerShown:false,}}
+          />
+          
         </Stack.Navigator>
       </NavigationContainer>
     )

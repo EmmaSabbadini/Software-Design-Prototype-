@@ -13,12 +13,14 @@ import {auth} from '../../firebase'
 
 export default function User({navigation}){
     const[user, setUser] = useState()
-    const[name, setName] = useState();
+    const[name, setName] = useState()
+    const[userID, setUserID] = useState()
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
           setUser(user)
           setName(user.displayName)
+          setUserID(user.uid)
         } else {
     
         }
@@ -30,8 +32,8 @@ export default function User({navigation}){
                 <View>
                     <Text style={{fontSize: 30, alignSelf: 'center'} }>{'welcome ' + name}</Text>
                     <Button mode = 'contained' onPress={() => {navigation.navigate('AddItem')}}> Add Item</Button>
-                    <Button mode = 'contained' onPress={() => {navigation.navigate('Item', {fileName: "KrBNrD5vCSxZQdDLyo80"})}}>My Items</Button>
-                    <Button mode = 'contained' >Saved</Button>
+                    <Button mode = 'contained' onPress={() => {navigation.navigate('MyItems', {userID : userID})}}>My Items</Button>
+                    <Button mode = 'contained' onPress={() => {navigation.navigate('Saved', {userID : userID})}}>Saved</Button>
                 </View>
             </SafeAreaView>
                 
