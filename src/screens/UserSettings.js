@@ -7,7 +7,7 @@ import * as ImagePicker from 'expo-image-picker'
 import {addDoc, collection, doc, setDoc} from 'firebase/firestore'
 import 'react-native-get-random-values'
 import { nanoid } from 'nanoid'
-import {onAuthStateChanged } from "firebase/auth";
+import {onAuthStateChanged, updateEmail } from "firebase/auth";
 import { theme } from '../core/theme'
 import Toast from '../components/Toast'
 import { signInWithEmailAndPassword, sendPasswordResetEmail,updateProfile} from "firebase/auth";
@@ -65,6 +65,7 @@ export default function AddItem({navigation}){
     const[desc, setDesc] = useState()
     const[itemType, setItemType] = useState()
     const[user, setUser] = useState()
+    const [email, setEmail] = useState('')
 
 
     onAuthStateChanged(auth, (user) => {
@@ -156,6 +157,34 @@ export default function AddItem({navigation}){
                  <Text >{'Account Username: ' + user.displayName}</Text>
                   <Text  >{'Account Email Address: ' + user.email}</Text>
                  </View>
+                 <TextInput
+                  label="Email"
+                  returnKeyType="next"
+                  value={email.value}
+                  onChangeText={setEmail}
+                  error={!!email.error}
+                  errorText={email.error}
+                  autoCapitalize="none"
+                  autoCompleteType="email"
+                  textContentType="emailAddress"
+                  keyboardType="email-address"
+                />
+                <View>
+                  <Text  >{'Change Account Email'}</Text>
+                    <Button
+                      mode = "contained"
+                      onPress={() => {updateEmail(auth.currentUser, email).then(() => {
+                        // Email updated!
+                        // ...
+                      }).catch((error) => {
+                        // An error occurred
+                        // ...
+                      });
+                       Alert.alert('Email Reset to', email);}}
+                    >
+                      Change Email
+                    </Button>
+                  </View>
                  <View>
                   <Text  >{'Password: Forgot password?'}</Text>
                     <Button
@@ -164,7 +193,7 @@ export default function AddItem({navigation}){
                         const errorCode = error.code;
                         const errorMessage = error.message;
                         // ..
-                      }); Alert.alert('Password reset email sent to', user.email);}}
+                      }); Alert.alert('Email changed to', user.email);}}
                     >
                       Reset Password
                     </Button>
