@@ -49,9 +49,8 @@ const itemConverter = {
 
 export default function EditItem({navigation}){
    
-    const[image, setImage] = useState();
-    const[item, setItem] = useState();
-    const[price, setPrice] = useState()
+    const[image, setImage] = useState()
+    const[item, setItem] = useState()
     const[name, setName] = useState()
     const[desc, setDesc] = useState()
     const[itemType, setItemType] = useState()
@@ -74,7 +73,6 @@ export default function EditItem({navigation}){
      
         //Need to Update database with price, name, desc, itemType here
         await updateDoc(doc(db, 'Items' , id),{
-            price: price,
             name: name,
             itemType: itemType,
             desc: desc
@@ -134,12 +132,6 @@ export default function EditItem({navigation}){
                         onChangeText={setDesc}
                         value={desc}
                         placeholder ='Description'
-                    />
-                <TextInput
-                        style={styles.textBox}
-                        onChangeText={setPrice}
-                        value={price}
-                        placeholder ='Price'
                     />
                    <Button mode="contained" 
                  onPress={deleteItem}>
