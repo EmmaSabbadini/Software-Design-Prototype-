@@ -132,6 +132,7 @@ export default function Item({navigation}){
                             Save
                         </Button>
                         <Button mode = 'contained' onPress={() => {navigation.navigate('EditItem', {id})}}> Edit</Button>
+                        <Button mode = 'contained' onPress={() => {navigation.navigate('Bid', {item: item, itemID: route.params.fileName, user: user})}}> Edit</Button>
                         <Text style={styles.itemName}>{item.name + '   ' + item.price + ' €'}</Text>
                         <Text style={styles.itemType}>{"Posted by " + item.owner_name}</Text>
                         <Text style={styles.itemType}>{item.type}</Text>

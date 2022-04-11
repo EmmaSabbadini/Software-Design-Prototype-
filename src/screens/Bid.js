@@ -9,9 +9,10 @@ import Background from '../components/Background'
 import Button from '../components/Button';
 
 class bids {
-    constructor (bid, name) {
-        this.bid = bid;
-        this.bidder_name = name;
+    constructor (bid, name, bidder_email) {
+        this.bid = bid
+        this.bidder_name = name
+        this.bidder_email = bidder_email
     }
 }
 
@@ -32,7 +33,7 @@ export default function Bid({navigation} ) {
         const querySnapshot = await getDocs(collection(db, "Items", itemID, "bids"));
         querySnapshot.forEach((doc) => {
         const snapshot = doc.data();
-        snapData.push(new bids(snapshot.bid, snapshot.bidder_name));
+        snapData.push(new bids(snapshot.bid, snapshot.bidder_name, snapshot.bidder_email));
         });
 
         setOtherBids(snapData)
@@ -51,7 +52,7 @@ export default function Bid({navigation} ) {
         }
         console.log(item)
         return (
-            <Button mode="contained" >
+            <Button mode="contained" onPress={() => {navigation.navigate('CheckBid', {bid: item.bid, bidder_name: item.bidder_name, bidder_email: item.bidder_email})}}>
                 { item.bid + '€ : ' + item.bidder_name} 
             </Button>
             
@@ -76,6 +77,7 @@ export default function Bid({navigation} ) {
         await addDoc(collection(db, 'Items', itemID, 'bids'), {
             bidder_ID: user.uid,
             bidder_name: user.displayName,
+            bidder_email: user.email,
             bid: parseFloat(bid)
         });
 
