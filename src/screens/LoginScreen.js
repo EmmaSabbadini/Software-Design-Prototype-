@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { TouchableOpacity, StyleSheet, View, Pressable } from "react-native";
+import { TouchableOpacity, StyleSheet, View } from "react-native";
 import { Center } from 'native-base'
 import { Text } from "react-native-paper";
 import Background from "../components/Background";
 import Logo from "../components/Logo";
 import Header from "../components/Header";
 import Button from "../components/Button";
-import TextInput from "../components/TextInput";
+// import TextInput from "../components/TextInput";
+
+import { TextInput} from 'react-native-paper'
 import BackButton from "../components/BackButton";
 import { theme } from "../core/theme";
 import Toast from "../components/Toast";
@@ -22,6 +24,7 @@ export default function LoginScreen({ navigation }) {
   const [error, setError] = useState();
   const [passwordVisibility, setPasswordVisibility] = useState(true);
   const [rightIcon, setRightIcon] = useState('eye');
+
 
 
 
@@ -42,11 +45,7 @@ export default function LoginScreen({ navigation }) {
       <Header style={styles.ln1}> Hello !</Header>
       <Header style={styles.ln2}>Welcome back.</Header>
 
-      <View style={{
-        marginLeft: 3,
-        width: '100%',
-        
-      }}>
+     
 
       <TextInput
         label="Email"
@@ -59,19 +58,21 @@ export default function LoginScreen({ navigation }) {
         autoCompleteType="email"
         textContentType="emailAddress"
         keyboardType="email-address"
+        selectionColor={theme.colors.primary}
         style={{
           width: '100%',
+          marginRight: 15,
           
   backgroundColor: theme.colors.surface,
         }}
         />
-        </View>
 
         <View style={styles.inputContainer}>
         <View style={{
           alignItems: 'center',
           justifyContent: 'center',
-          marginLeft: 3
+          marginTop: 10,
+          backgroundColor: theme.colors.surface
         }}>
 
         <TouchableOpacity onPress={() =>{
@@ -92,6 +93,12 @@ export default function LoginScreen({ navigation }) {
         error={!!password.error}
         errorText={password.error}
         secureTextEntry={passwordVisibility}
+        selectionColor={theme.colors.primary}
+        style={{
+          width : '100%',
+          marginTop : 5,
+          backgroundColor : theme.colors.surface
+        }}
         />
 
       </View>
@@ -141,6 +148,7 @@ const styles = StyleSheet.create({
   forgotPassword: {
     width: "100%",
     alignItems: "center",
+    marginTop: 20,
     marginBottom: 24,
   },
   row: {
