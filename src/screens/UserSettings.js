@@ -38,7 +38,7 @@ export default function UserSettings({ navigation }) {
     <View>
       <Button
         title="Back to Settings"
-        onPress={() => navigation.navigate('UserSettings')}
+        onPress={() => navigation.navigate('Settings')}
       />
     </View>
     <Separator />
@@ -46,13 +46,13 @@ export default function UserSettings({ navigation }) {
       <Text style={styles.title}>
       <Text style={{fontSize: 30, alignSelf: 'center'} }>{'User Information'}</Text>
       </Text>
-      <Text style={{fontSize: 15, alignSelf: 'left'} }>{'Provider-specific UID:' + uid}</Text>
-      <Text style={{fontSize: 15, alignSelf: 'left'} }>{'Account Username: ' + displayName}</Text>
-      <Text style={{fontSize: 15, alignSelf: 'left'} }>{'Account Email Address: ' + email}</Text>
+      <Text style={{fontSize: 15, alignSelf: 'flex-start'} }>{'Provider-specific UID:' + uid}</Text>
+      <Text style={{fontSize: 15, alignSelf: 'flex-start'} }>{'Account Username: ' + displayName}</Text>
+      <Text style={{fontSize: 15, alignSelf: 'flex-start'} }>{'Account Email Address: ' + email}</Text>
     </View>
     <Separator />
     <View>
-    <Text style={{fontSize: 15, alignSelf: 'left'} }>{'Password: Forgot password?'}</Text>
+    <Text style={{fontSize: 15, alignSelf: 'flex-start'} }>{'Password: Forgot password?'}</Text>
       <Button
         title="Reset Password"
         onPress={() => {sendPasswordResetEmail(auth, email).catch((error) => {

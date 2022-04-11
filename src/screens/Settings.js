@@ -47,7 +47,7 @@ return(
          <Button
         title="Sign Out"
         color="#f194ff"
-        onPress={() => {signOut(auth); Alert.alert('User Signed Out');}
+        onPress={() => {signOut(auth); Alert.alert('User Signed Out');navigation.navigate('Welcome');}
         }
        />
       </View>
