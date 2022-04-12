@@ -91,7 +91,7 @@ export default function MyItems({route, navigation}){
             <View>
             <Text style={{
               fontSize: 15,
-              color: 'grey',
+              color: 'white',
               margin: Dimensions.get('window').width * 0.025,
               }}>{item.name}
             </Text>

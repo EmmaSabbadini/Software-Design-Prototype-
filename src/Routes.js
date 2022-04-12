@@ -15,7 +15,7 @@ import UserSettings from './screens/UserSettings';
 import Welcome from './screens/Welcome';
 import EditItem from './screens/EditItem';
 import Bid from './screens/Bid';
-import MyItems from './screens/myitems';
+import MyItems from './screens/MyItems';
 import CheckBid from './screens/CheckBid';
 
 const BottomTab = () => {
@@ -114,7 +114,7 @@ export default Routes = () => {
             component={MyItems}
             options={{headerShown:false,}}
           />
-       
+          <Stack.Screen
             name = 'CheckBid'
             component={CheckBid}
             options={{headerShown:false,}}

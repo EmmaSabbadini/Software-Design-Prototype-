@@ -7,7 +7,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {onAuthStateChanged } from "firebase/auth";
 import {storage,auth} from '../../firebase'
 import { signInWithEmailAndPassword } from "firebase/auth";
-import Button from '../components/Button'
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -42,12 +41,13 @@ export default function User({navigation}){
     const[email, setEmail] = useState();
     const[imageUrl, setImageUrl] = useState();
 
+
     onAuthStateChanged(auth, (user) => {
         if (user) {
             setUser(user)
             setName(user.displayName)
-            setUserID(user.uid)
             setEmail(user.email)
+            setUserID(user.uid)
             if(user.photoURL){
                 imageRef = ref(storage, `${user.photoURL}.jpeg`)
                 getDownloadURL(imageRef)
@@ -64,10 +64,8 @@ export default function User({navigation}){
             <Image style={styles.profile_img} source={{uri: imageUrl}}/>
             <View style = {styles.userbox}>
                 <View>
-                    <Text style={{fontSize: 30, alignSelf: 'center'} }>{'welcome ' + name}</Text>
-                    <Button mode = 'contained' onPress={() => {navigation.navigate('AddItem')}}> Add Item</Button>
-                    <Button mode = 'contained' onPress={() => {navigation.navigate('MyItems', {userID : userID})}}>My Items</Button>
-                    <Button mode = 'contained' onPress={() => {navigation.navigate('Saved', {userID : userID})}}>Saved</Button>
+                    <Text style={styles.header}> Profile </Text>
+                    <UserInfo title={name} subtitle={email}/>
                 </View>
                 
                 <View style={styles.screenContainer}>
@@ -75,11 +73,13 @@ export default function User({navigation}){
                             icon="chevron-right" 
                             title="Saved Items"
                             subtitle="Check Orders" 
+                            onPress={() => {navigation.navigate('MyItems', {userID : userID})}}
                             backgroundColor="#7D7D7D"/>
                         <AppButton 
                             icon="chevron-right" 
                             title="My Listings" 
                             subtitle="Check Listings" 
+                            onPress={() => {navigation.navigate('MyItems', {userID : userID})}}
                             backgroundColor="#7D7D7D"/>
                         <AppButton 
                             icon="chevron-right" 
