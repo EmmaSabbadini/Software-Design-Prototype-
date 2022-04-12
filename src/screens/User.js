@@ -37,14 +37,17 @@ const UserInfo = ({title, subtitle}) => (
 export default function User({navigation}){
     const[user, setUser] = useState();
     const[name, setName] = useState();
+    const[userID, setUserID] = useState();
     const[email, setEmail] = useState();
     const[imageUrl, setImageUrl] = useState();
+
 
     onAuthStateChanged(auth, (user) => {
         if (user) {
             setUser(user)
             setName(user.displayName)
             setEmail(user.email)
+            setUserID(user.uid)
             if(user.photoURL){
                 imageRef = ref(storage, `${user.photoURL}.jpeg`)
                 getDownloadURL(imageRef)
@@ -70,11 +73,13 @@ export default function User({navigation}){
                             icon="chevron-right" 
                             title="Saved Items"
                             subtitle="Check Orders" 
+                            onPress={() => {navigation.navigate('MyItems', {userID : userID})}}
                             backgroundColor="#7D7D7D"/>
                         <AppButton 
                             icon="chevron-right" 
                             title="My Listings" 
                             subtitle="Check Listings" 
+                            onPress={() => {navigation.navigate('MyItems', {userID : userID})}}
                             backgroundColor="#7D7D7D"/>
                         <AppButton 
                             icon="chevron-right" 
