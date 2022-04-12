@@ -133,11 +133,11 @@ export default function EditItem({navigation}){
                         value={desc}
                         placeholder ='Description'
                     />
-                   <Button mode="contained" 
+                   <Button style={styles.button} mode="contained" 
                  onPress={deleteItem}>
                         Delete 
                     </Button>
-                 <Button mode="contained" 
+                 <Button style={styles.button} mode="contained" 
                  onPress={updateDatabase}>
                         Done
                     </Button>
@@ -200,5 +200,12 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
 
     },   
+    button: {
+        backgroundColor: 'grey',
+        alignSelf: 'center',
+        width: '90%',
+        elevation: 6,
+  
+      },
 
 })
