@@ -3,7 +3,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import Login from './screens/LoginScreen'
 import Explore from './screens/Explore'
 import User from './screens/User'
 import Settings from './screens/Settings';
@@ -12,6 +11,7 @@ import RegisterScreen from './screens/RegisterScreen';
 import Item from './screens/Item';
 import LoginScreen from './screens/LoginScreen';
 import UserSettings from './screens/UserSettings';
+import Welcome from './screens/Welcome';
 import EditItem from './screens/EditItem';
 import Bid from './screens/Bid';
 import MyItems from './screens/myitems';
@@ -24,13 +24,13 @@ const BottomTab = () => {
   return(
     <Tab.Navigator>
       <Tab.Screen 
-        name = 'Explore'
-        component={Explore}
+        name = 'User'
+        component={User}
         options={{headerShown:false,}}
       />
       <Tab.Screen 
-        name = 'User'
-        component={User}
+        name = 'Explore'
+        component={Explore}
         options={{headerShown:false,}}
       />
       <Tab.Screen 
@@ -38,15 +38,6 @@ const BottomTab = () => {
         component={Settings}
         options={{headerShown:false,}}
       />
-      <Tab.Screen 
-        name = 'Login'
-        component={Login}
-        options={{headerShown:false,}}
-      /><Tab.Screen 
-      name = 'RegisterScreen'
-      component={RegisterScreen}
-      options={{headerShown:false,}}
-    />
     </Tab.Navigator>
   );
 
@@ -56,7 +47,7 @@ export default Routes = () => {
     const Stack = createNativeStackNavigator()
     return (
       <NavigationContainer >
-        <Stack.Navigator initialRouteName="Home">
+        <Stack.Navigator initialRouteName="Welcome">
           <Stack.Screen
             name = 'BottomTab'
             component={BottomTab}
@@ -108,6 +99,11 @@ export default Routes = () => {
             options={{headerShown:false,}}
           />
           <Stack.Screen
+            name = 'Welcome'
+            component={Welcome}
+            options={{headerShown:false,}}
+          />
+           <Stack.Screen
             name = 'Bid'
             component={Bid}
             options={{headerShown:false,}}

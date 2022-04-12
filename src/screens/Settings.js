@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Button, View, SafeAreaView, Text, Alert } from 'react-native';
+import { StyleSheet, Button, View, SafeAreaView, Text, Alert, StatusBar } from 'react-native';
 import {auth} from "../../firebase"
 import { getAuth, signInWithPhoneNumber, signOut } from "firebase/auth";
 
@@ -47,7 +47,7 @@ return(
          <Button
         title="Sign Out"
         color="#f194ff"
-        onPress={() => {signOut(auth); Alert.alert('User Signed Out');}
+        onPress={() => {signOut(auth); Alert.alert('User Signed Out');navigation.navigate('Welcome');}
         }
        />
       </View>
@@ -59,6 +59,7 @@ return(
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 20,
     flex: 1,
     justifyContent: 'center',
     marginHorizontal: 16,
@@ -76,5 +77,15 @@ const styles = StyleSheet.create({
     borderBottomColor: '#737373',
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
+  profile_img: {
+    position: 'absolute',
+    borderWidth:3,
+    borderColor:'#ffffff',
+    top: 90,
+    left: 20,
+    width: 100, 
+    height: 100, 
+    borderRadius: 200/2,
+}   
 });
 

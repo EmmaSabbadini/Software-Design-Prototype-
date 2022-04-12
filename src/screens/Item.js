@@ -58,7 +58,15 @@ export default function Item({navigation}){
     const route = useRoute();
 
     const auth = getAuth();
-   onAuthStateChanged(auth, (user) => {
+
+    React.useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+          getData()
+        });
+        return unsubscribe;
+      }, [navigation]);
+    
+    onAuthStateChanged(auth, (user) => {
      if (user) {
       uid = user.uid;
       setUser(user)

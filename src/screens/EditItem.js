@@ -1,7 +1,7 @@
 import {ref, getDownloadURL } from 'firebase/storage';
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc, collection ,deleteDoc} from "firebase/firestore";
 import React, { useState, useEffect } from 'react'
-import { Image, Text, SafeAreaView, Dimensions, View, StyleSheet, StatusBar } from 'react-native';
+import {Image, Text, KeyboardAvoidingView, SafeAreaView, View,TextInput,StyleSheet,Dimensions,StatusBar} from 'react-native'
 import Button from '../components/Button';
 import { storage, db } from '../../firebase';
 import { useRoute } from "@react-navigation/native";
@@ -9,8 +9,6 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useNavigation } from '@react-navigation/native';
 
  
-
-//Class template for the item fetching from firestore
 class item {
     constructor (owner_name ,name, type, desc, imageUrl, price, owner_ID) {
         this.owner_name = owner_name;
@@ -47,29 +45,49 @@ const itemConverter = {
     }
 };
 
-//The screen designed to be invoked with objectID to fetch it from the database (route.params.filename)
+ 
 
-export default function EditItem(){
-    //handle image url request from firestore
+export default function EditItem({navigation}){
+   
     const[image, setImage] = useState();
     const[item, setItem] = useState();
+    const[price, setPrice] = useState()
+    const[name, setName] = useState()
+    const[desc, setDesc] = useState()
+    const[itemType, setItemType] = useState()
+
     const route = useRoute();
 
-     
-     
-    
+
     const getData = async() => {
-        //console.log("trying to access " + route.params.fileName);
         const docRef = doc(db, "Items", id).withConverter(itemConverter);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-            // Convert to City object
             const item = docSnap.data();
             setItem(item);
           } else {
             console.log("No such document!");
           }
     }
+
+    const updateDatabase = async() => {
+     
+        //Need to Update database with price, name, desc, itemType here
+        await updateDoc(doc(db, 'Items' , id),{
+            price: price,
+            name: name,
+            itemType: itemType,
+            desc: desc
+        });
+       navigation.navigate('Explore');
+   } 
+
+   const deleteItem = async() => {
+     
+    
+    await deleteDoc(doc(db, 'Items' , id),);
+   navigation.navigate('Explore');
+} 
 
     if(!item){
         getData();
@@ -83,20 +101,12 @@ export default function EditItem(){
         );
 
     } else {
-
-        // console.log(item.imageUrl);
-        // console.log(item.name);
-        // console.log(item.type);
-        // console.log(item.desc);
-
         if(item.imageUrl){
             imageRef = ref(storage, `${item.imageUrl}.jpeg`)
             getDownloadURL(imageRef)
             .then((url)=>{setImage(url);});
         }
 
-        
-            
           
         return(
             <SafeAreaView style={styles.container}>
@@ -106,8 +116,39 @@ export default function EditItem(){
 
                 <View style={{flex: 1, justifyContent: 'flex-start', alignItems:'flex-start'}}>
                 
-                <Text style={{fontSize: 30, textAlignVertical: 'center', textAlign: 'center'}}>Edit Items!</Text>
-
+                <Text style={{fontSize: 30, textAlignVertical: 'center', textAlign: 'center'}}>Edit Item:</Text>
+                <TextInput
+                        style={styles.textBox}
+                        onChangeText={setName}
+                        value={name}
+                        placeholder ='Name'
+                    />
+                    <TextInput
+                        style={styles.textBox}
+                        onChangeText={setItemType}
+                        value={itemType}
+                        placeholder ='Type'
+                    />
+                    <TextInput
+                        style={styles.longtextBox}
+                        onChangeText={setDesc}
+                        value={desc}
+                        placeholder ='Description'
+                    />
+                <TextInput
+                        style={styles.textBox}
+                        onChangeText={setPrice}
+                        value={price}
+                        placeholder ='Price'
+                    />
+                   <Button mode="contained" 
+                 onPress={deleteItem}>
+                        Delete 
+                    </Button>
+                 <Button mode="contained" 
+                 onPress={updateDatabase}>
+                        Done
+                    </Button>
                 </View>  
             </SafeAreaView>
         );
@@ -133,6 +174,18 @@ const styles = StyleSheet.create({
 
         fontSize: 30,
     },
+
+    textBox:{
+        flex: 1,
+        fontSize: 30,
+    },
+
+    longtextBox:{
+        textAlignVertical: 'top',
+        flex: 2,
+        fontSize: 30,
+    },
+
 
     itemDesc:{
 
