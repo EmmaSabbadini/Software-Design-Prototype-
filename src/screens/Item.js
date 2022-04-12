@@ -131,7 +131,7 @@ export default function Item({navigation}){
                         <Button mode = 'contained' onPress={() => {navigation.navigate('EditItem', {id})}}> Edit</Button>
                         <Button mode = 'contained' onPress={() => {navigation.navigate('Bid', {item: item, itemID: route.params.fileName, user: user})}}> See current bids</Button>
                         <Text style={styles.itemName}>{item.name + '   ' + item.price + ' €'}</Text>
-                        <Text style={styles.itemType}>{"Posted by " + item.owner_name}</Text>
+                        <Text style={styles.subtitle}>{"Posted by " + item.owner_name}</Text>
                         <Text style={styles.itemType}>{item.type}</Text>
                         <Text style={styles.itemDesc}>{item.desc}</Text>
                     </View>  
@@ -150,7 +150,7 @@ export default function Item({navigation}){
                         Bid
                     </Button>
                     <Text style={styles.itemName}>{item.name + '   ' + item.price + ' €'}</Text>
-                    <Text style={styles.itemType}>{"Posted by " + item.owner_name}</Text>
+                    <Text style={styles.subtitle}>{"Posted by " + item.owner_name}</Text>
                     <Text style={styles.itemType}>{item.type}</Text>
                     <Text style={styles.itemDesc}>{item.desc}</Text>
                 </View>  
@@ -170,23 +170,25 @@ const styles = StyleSheet.create({
     },
 
     itemName:{
-
-        fontSize: 35,
+        fontWeight: 'bold',
+        fontSize: 30,
     },
 
     itemType:{
 
-        fontSize: 30,
+        fontSize: 24,
+        color: 'black',
+    },
+
+    subtitle: {
+        fontSize: 26,
+        color: 'black',
+
     },
 
     itemDesc:{
-
-        fontSize: 30,
-    },
-
-    itemPrice:{
-
-        fontSize: 40,
+        color: 'grey',
+        fontSize: 22,
     },
 
     image:{

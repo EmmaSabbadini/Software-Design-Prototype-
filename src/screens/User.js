@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
         paddingTop: StatusBar.currentHeight,
     },
     screenContainer: {
-        top: '15%',
+        top: '20%',
         justifyContent: "center",
     },
     appButtonDescText: {
