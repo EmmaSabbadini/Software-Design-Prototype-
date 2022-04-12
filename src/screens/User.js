@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {onAuthStateChanged } from "firebase/auth";
 import {storage,auth} from '../../firebase'
 import { signInWithEmailAndPassword } from "firebase/auth";
+import Button from '../components/Button'
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -37,6 +38,7 @@ const UserInfo = ({title, subtitle}) => (
 export default function User({navigation}){
     const[user, setUser] = useState();
     const[name, setName] = useState();
+    const[userID, setUserID] = useState();
     const[email, setEmail] = useState();
     const[imageUrl, setImageUrl] = useState();
 
@@ -44,6 +46,7 @@ export default function User({navigation}){
         if (user) {
             setUser(user)
             setName(user.displayName)
+            setUserID(user.uid)
             setEmail(user.email)
             if(user.photoURL){
                 imageRef = ref(storage, `${user.photoURL}.jpeg`)
@@ -61,8 +64,10 @@ export default function User({navigation}){
             <Image style={styles.profile_img} source={{uri: imageUrl}}/>
             <View style = {styles.userbox}>
                 <View>
-                    <Text style={styles.header}> Profile </Text>
-                    <UserInfo title={name} subtitle={email}/>
+                    <Text style={{fontSize: 30, alignSelf: 'center'} }>{'welcome ' + name}</Text>
+                    <Button mode = 'contained' onPress={() => {navigation.navigate('AddItem')}}> Add Item</Button>
+                    <Button mode = 'contained' onPress={() => {navigation.navigate('MyItems', {userID : userID})}}>My Items</Button>
+                    <Button mode = 'contained' onPress={() => {navigation.navigate('Saved', {userID : userID})}}>Saved</Button>
                 </View>
                 
                 <View style={styles.screenContainer}>
