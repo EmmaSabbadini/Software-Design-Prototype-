@@ -131,32 +131,18 @@ export default function AddItem({navigation}){
     }
 
     return(
-        //Keyboard avoiding moves some fields around in a weird way, there is probably a fix for it tho
-        <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : "height"}
-            style={styles.container}
-        >
             <SafeAreaView style={styles.container}>
-                <View 
-                    style={{flex:1}}
-                >
-                    {image && <Image source={{ uri: image }} style={styles.image} />}
-                </View>
-
-                <View style={styles.container}>
+                  {image && <Image source={{ uri: image }} style={styles.image} />}
                 <Image
                 source={{ uri: user.photoURL }}
                 PlaceholderContent={{uri: "https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"}}
                 ></Image>
-                </View>
                 <View>
-                  <Text style={styles.title}>
-                  <Text>{'User Information'}</Text>
-                 </Text>
-                 <Text >{'Provider-specific UID:' + user.uid}</Text>
-                 <Text >{'Account Username: ' + user.displayName}</Text>
-                  <Text  >{'Account Email Address: ' + user.email}</Text>
-                 </View>
+                  <Text style={styles.header}>User Settings</Text>
+                  <Text style={styles.text}>{'Provider-specific UID:\n' + user.uid}</Text>
+                  <Text style={styles.text}>{'Account Username: ' + user.displayName}</Text>
+                  <Text style={styles.text}>{'Account Email Address: ' + user.email}</Text>
+                </View>
                  <TextInput
                   label="Email"
                   returnKeyType="next"
@@ -170,8 +156,8 @@ export default function AddItem({navigation}){
                   keyboardType="email-address"
                 />
                 <View>
-                  <Text  >{'Change Account Email'}</Text>
-                    <Button
+                    <Button 
+                      style={styles.button}
                       mode = "contained"
                       onPress={() => {updateEmail(auth.currentUser, email).then(() => {
                         // Email updated!
@@ -180,37 +166,36 @@ export default function AddItem({navigation}){
                         // An error occurred
                         // ...
                       });
-                       Alert.alert('Email Reset to', email);}}
+                       Alert.alert('User email changed to ', email);}}
                     >
                       Change Email
                     </Button>
                   </View>
                  <View>
-                  <Text  >{'Password: Forgot password?'}</Text>
                     <Button
+                      style={styles.button}
                       mode = "contained"
                       onPress={() => {sendPasswordResetEmail(auth, user.email).catch((error) => {
                         const errorCode = error.code;
                         const errorMessage = error.message;
                         // ..
-                      }); Alert.alert('Email changed to', user.email);}}
+                      }); Alert.alert('Password reset email sent to', user.email);}}
                     >
                       Reset Password
                     </Button>
                   </View>
-                <View   
-                    style={{flex:1}}
-                >
-                    <Button mode="contained" onPress={getImage} styles={{width: '90%'}}>
-                        Choose Image
+                    <Button 
+                      style={styles.button}
+                      mode="contained" 
+                      onPress={getImage} styles={{width: '90%'}}>
+                      Choose Image
                     </Button>
-                    <Button mode="contained" onPress={updateUser}>
+                    <Button 
+                      style={styles.button}
+                      mode="contained" onPress={updateUser}>
                         Upload Profile Picture
                     </Button>
-                </View>
-                
             </SafeAreaView>
-        </KeyboardAvoidingView>
     );
 
 
@@ -218,55 +203,34 @@ export default function AddItem({navigation}){
 
 
 const styles = StyleSheet.create({
+  container: {
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }, 
+  header: {
+    textAlign: 'center',
+    padding: 20,
+    fontSize: 25,
+    fontWeight: 'bold',
+    color: 'black',
+    },  
+    button: {
+      backgroundColor: 'grey',
+      width: 260,
+      elevation: 6,
 
+    },
     imageBox: {
         alignItems: 'center',
         justifyContent: 'center',
     },
-
-    textBox:{
-        flex: 1,
-        fontSize: 30,
-    },
-
-    longtextBox:{
-        textAlignVertical: 'top',
-        flex: 2,
-        fontSize: 30,
-    },
-
     image:{
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').width,
+      width: 100,
+      height: 100,
     },
-
-    container: {
-        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 20,
-        flex: 1,
-        justifyContent: 'center',
-
-    },   
-    forgotPassword: {
-      width: '100%',
-      alignItems: 'flex-end',
-      marginBottom: 12,
-    },
-    row: {
-      flexDirection: 'row',
-      marginTop: 4,
-    },
-    forgot: {
-      fontSize: 13,
-      color: theme.colors.secondary,
-    },
-    link: {
-      fontWeight: 'bold',
-      color: theme.colors.primary,
-    },
-     image: {
-    width: 110,
-    height: 110,
-    marginBottom: 8,
-  },
-
+    text: {
+      fontSize: 16,
+      padding: 5,
+    },  
 })

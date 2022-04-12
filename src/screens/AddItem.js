@@ -127,7 +127,7 @@ export default function AddItem({navigation}){
                 <View   
                     style={{flex:1}}
                 >
-                    <Button mode="contained" onPress={getImage} styles={{width: '90%'}}>
+                    <Button style={styles.button} mode="contained" onPress={getImage} styles={{width: '90%'}}>
                         Choose Image
                     </Button>
                     <TextInput
@@ -148,7 +148,7 @@ export default function AddItem({navigation}){
                         value={desc}
                         placeholder ='Description'
                     />
-                    <Button mode="contained" onPress={updateDatabase}>
+                    <Button style={styles.button} mode="contained" onPress={updateDatabase}>
                         Add Item
                     </Button>
                 </View>
@@ -189,6 +189,18 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
 
-    },   
+    }, 
+    
+    button: {
+        backgroundColor: 'grey',
+        alignSelf: 'center',
+        width: '90%',
+        shadowOpacity: 0.8,
+        elevation: 6,
+        shadowRadius: 30 ,
+        shadowOffset : { width: 1, height: 13},
+  
+      },
+
 
 })

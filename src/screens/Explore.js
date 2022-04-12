@@ -121,7 +121,6 @@ export default function Explore({navigation}){
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#dadada',
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 20,
     alignSelf: 'center',
   },

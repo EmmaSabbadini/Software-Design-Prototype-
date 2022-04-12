@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { StyleSheet, Image, View, TouchableOpacity, Text, } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -15,7 +16,7 @@ import Welcome from './screens/Welcome';
 import EditItem from './screens/EditItem';
 import Bid from './screens/Bid';
 import MyItems from './screens/myitems';
-
+import CheckBid from './screens/CheckBid';
 
 const BottomTab = () => {
 
@@ -23,7 +24,7 @@ const BottomTab = () => {
 
   return(
     <Tab.Navigator>
-      <Tab.Screen 
+      <Tab.Screen
         name = 'User'
         component={User}
         options={{headerShown:false,}}
@@ -113,8 +114,19 @@ export default Routes = () => {
             component={MyItems}
             options={{headerShown:false,}}
           />
-          
+       
+            name = 'CheckBid'
+            component={CheckBid}
+            options={{headerShown:false,}}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     )
   }
+
+const styles = StyleSheet.create({
+    icon: {
+      height: 22,
+      width: 22,
+    },
+})

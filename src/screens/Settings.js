@@ -1,91 +1,92 @@
-import React from 'react';
-import { StyleSheet, Button, View, SafeAreaView, Text, Alert, StatusBar } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { StyleSheet, Image, View, TouchableOpacity, Text, Alert, StatusBar } from 'react-native';
 import {auth} from "../../firebase"
 import { getAuth, signInWithPhoneNumber, signOut } from "firebase/auth";
+import React, {useEffect} from 'react';
+
+var user = auth.currentUser;
 
 const Separator = () => (
   <View style={styles.separator} />
 );
 
-
-var user = auth.currentUser;
-
-
-export default function LoginScreen({ navigation }) {
-return(
-  <SafeAreaView style={styles.container}>
-    <View>
-      <Text style={styles.title}>
-        Account Settings for User. Use these functions to change user name, passwords, and general account privacy settings. 
-      </Text>
-      <Button
-        title="Change User Information"
-        onPress={() => navigation.navigate('UserSettings')}
-      />
+export default function Settings ({ navigation }) {
+  return(
+    <View style={styles.container}>
+      <Text style={styles.header}>Settings</Text>
+      <Image style={styles.image} source={require('../assets/icons/account_icon.png')}></Image>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('UserSettings')}>
+          <Text style={styles.text}>Account Settings</Text>
+        </TouchableOpacity>
+        <Separator />
+        <Image style={styles.image} source={require('../assets/icons/notification_icon.png')}></Image>
+        <TouchableOpacity>
+          <Text style={styles.text}>Notifications</Text>
+        </TouchableOpacity>
+        <Separator />
+        <Image style={styles.image} source={require('../assets/icons/appearance_icon.png')}></Image>
+        <TouchableOpacity>
+          <Text style={styles.text}>Appearance</Text>
+        </TouchableOpacity>
+        <Separator />
+        <Image style={styles.image} source={require('../assets/icons/security_icon.png')}></Image>
+        <TouchableOpacity>
+          <Text style={styles.text}>Privacy & Security</Text>
+        </TouchableOpacity>
+        <Separator />
+        <Image style={styles.image} source={require('../assets/icons/support_icon.png')}></Image>
+        <TouchableOpacity>
+          <Text style={styles.text}>Help and Support</Text>
+        </TouchableOpacity>
+        <Separator />
+        <Image style={styles.image} source={require('../assets/icons/about_icon.png')}></Image>
+        <TouchableOpacity>
+          <Text style={styles.text}>About</Text>
+        </TouchableOpacity>
+        <Separator />
+        <Image style={styles.image} source={require('../assets/icons/logout_icon.png')}></Image>
+        <TouchableOpacity
+          onPress={() => {signOut(auth); Alert.alert('User Signed Out');navigation.navigate('Welcome');}}>
+          <Text style={{
+            color: 'red', 
+            fontSize:18,
+            alignSelf: 'flex-start',
+            padding: 15,
+            textAlign: 'left',}}>
+              LOGOUT</Text>
+        </TouchableOpacity>
+        <Separator />
     </View>
-    <Separator />
-    <View>
-      <Text style={styles.title}>
-        Display Settings. 
-      </Text>
-      <Button
-        title="Press me"
-        color="#f194ff"
-        onPress={() => Alert.alert('Button with adjusted color pressed')}
-      />
-    </View>
-    <Separator />
-    <View>
-      <Text style={styles.title}>
-        This layout strategy lets the title define the width of the button.
-      </Text>
-      <View style={styles.fixToText}>
-        <Button
-          title="Sign In"
-          onPress={() => navigation.navigate('LoginScreen')}
-        />
-         <Button
-        title="Sign Out"
-        color="#f194ff"
-        onPress={() => {signOut(auth); Alert.alert('User Signed Out');navigation.navigate('Welcome');}
-        }
-       />
-      </View>
-    </View>
-  </SafeAreaView>
-
-);
-}
-
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 20,
-    flex: 1,
-    justifyContent: 'center',
-    marginHorizontal: 16,
-  },
-  title: {
-    textAlign: 'center',
-    marginVertical: 8,
-  },
-  fixToText: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  separator: {
-    marginVertical: 8,
-    borderBottomColor: '#737373',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-  profile_img: {
-    position: 'absolute',
-    borderWidth:3,
-    borderColor:'#ffffff',
-    top: 90,
-    left: 20,
-    width: 100, 
-    height: 100, 
-    borderRadius: 200/2,
-}   
+    );
+  }
+  
+  const styles = StyleSheet.create({
+    container: {
+      paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 20,
+      flex: 1,
+      alignItems: 'center',
+    },
+    header: {
+      textAlign: 'center',
+      fontSize: 28,
+      padding: 40,
+    },
+    image: {
+      height: 22,
+      width: 22,
+      right: 100,
+      top: 38,
+    },
+    text: {
+      fontSize: 18,
+      alignSelf: 'flex-start',
+      padding: 15,
+      textAlign: 'left',
+    },
+    separator: {
+      width: 265,
+      height: 1,
+      backgroundColor: '#DEDEDE',
+    },  
 });
-

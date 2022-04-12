@@ -9,9 +9,10 @@ import Background from '../components/Background'
 import Button from '../components/Button';
 
 class bids {
-    constructor (bid, name) {
-        this.bid = bid;
-        this.bidder_name = name;
+    constructor (bid, name, bidder_email) {
+        this.bid = bid
+        this.bidder_name = name
+        this.bidder_email = bidder_email
     }
 }
 
@@ -32,7 +33,7 @@ export default function Bid({navigation} ) {
         const querySnapshot = await getDocs(collection(db, "Items", itemID, "bids"));
         querySnapshot.forEach((doc) => {
         const snapshot = doc.data();
-        snapData.push(new bids(snapshot.bid, snapshot.bidder_name));
+        snapData.push(new bids(snapshot.bid, snapshot.bidder_name, snapshot.bidder_email));
         });
 
         setOtherBids(snapData)
@@ -51,7 +52,7 @@ export default function Bid({navigation} ) {
         }
         console.log(item)
         return (
-            <Button mode="contained" >
+            <Button style={styles.button} mode="contained" onPress={() => {navigation.navigate('CheckBid', {bid: item.bid, bidder_name: item.bidder_name, bidder_email: item.bidder_email})}}>
                 { item.bid + '€ : ' + item.bidder_name} 
             </Button>
             
@@ -63,19 +64,14 @@ export default function Bid({navigation} ) {
 
         if(item.price > bid){
             
+        } else if(user.uid == item.owner_ID){
+            
         } else {
-
-        if(user.uid == item.owner_ID){
-            //handle bid on your item
-        }
-
-        if(bid < item.price) {
-            //handle price lower than current
-        }
 
         await addDoc(collection(db, 'Items', itemID, 'bids'), {
             bidder_ID: user.uid,
             bidder_name: user.displayName,
+            bidder_email: user.email,
             bid: parseFloat(bid)
         });
 
@@ -87,7 +83,7 @@ export default function Bid({navigation} ) {
         
 
         navigation.navigate('Item',{fileName: itemID});
-        s}
+        }
     }
 
     if(!otherBids){
@@ -99,26 +95,40 @@ export default function Bid({navigation} ) {
             </Background>
             );
     } else if(otherBids){
-        console.log(otherBids)
-        return(
+        if(user.uid == item.owner_ID){
+            return(
 
-            <Background>
+                <Background>
+                    
+                    <FlatList
+                        data = {otherBids}
+                        renderItem = {renderItem}
+                    />
+                </Background>
                 
-                <TextInput
-                            onChangeText={setBid}
-                            value={bid}
-                            placeholder ='Your bid'
-                />
-                <Button mode="contained" onPress={addBid}>
-                    Bid
-                </Button>
-                <FlatList
-                    data = {otherBids}
-                    renderItem = {renderItem}
-                />
-            </Background>
-            
-        )
+            )
+        } else {
+            return(
+
+                <Background>
+                    
+                    <TextInput
+                                onChangeText={setBid}
+                                value={bid}
+                                placeholder ='Your bid'
+                    />
+                    <Button style={styles.button} mode="contained" onPress={addBid} >
+                        Bid
+                    </Button>
+                    <FlatList
+                        data = {otherBids}
+                        renderItem = {renderItem}
+                    />
+                </Background>
+                
+            )
+        }
+        
     }
 
     return(
@@ -128,7 +138,7 @@ export default function Bid({navigation} ) {
                             value={bid}
                             placeholder ='Your bid'
                 />
-                <Button mode="contained" onPress={addBid}>
+                <Button style={styles.button} mode="contained" onPress={addBid}>
                     Bid
                 </Button>
         </Background>
@@ -150,4 +160,11 @@ const styles = StyleSheet.create({
     bidderText: {
         fontSize: 20,
     },
+
+    button: {
+        backgroundColor: 'grey',
+        width: 260,
+        elevation: 6,
+  
+      },
 });
