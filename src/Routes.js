@@ -22,7 +22,8 @@ const BottomTab = () => {
   const Tab = createBottomTabNavigator();
 
   return(
-    <Tab.Navigator>
+    <Tab.Navigator
+    >
       <Tab.Screen
         name = 'User'
         component={User}
