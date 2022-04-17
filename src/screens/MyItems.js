@@ -101,7 +101,7 @@ export default function MyItems({route, navigation}){
               fontSize: 15,
               color: 'black',
               margin: Dimensions.get('window').width * 0.025,
-              }}>{item.price + ' €'}
+              }}>{'€' + item.price}
             </Text>
             </View>
             
@@ -129,7 +129,7 @@ export default function MyItems({route, navigation}){
   
   //console.log(items);
   //TODO replace this with loadng screen
-  return(<View><Text>bread</Text></View>);
+  return(<View><Text style={{fontSize: 18, textAlign: 'center'}}>Items not found</Text></View>);
   
 
 }

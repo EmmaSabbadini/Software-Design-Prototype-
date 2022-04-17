@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableOpacity, StyleSheet, View, SafeAreaView, Platform, StatusBar, Dimensions, ImageBackground } from 'react-native'
+import { TouchableOpacity, StyleSheet, View, Image, Platform, StatusBar, Dimensions, ImageBackground } from 'react-native'
 import { Text } from 'react-native-paper'
 
 const windowWidth = Dimensions.get('window').width;
@@ -14,6 +14,7 @@ export default function Welcome({ navigation }) {
                 source={require("../assets/furniture_wallpaper.jpg")} 
                 resizeMode='repeat'>
             </ImageBackground>
+            <Image style={styles.logo} source={require("../assets/logo_no_background.png")}/>
                 <View style={styles.welcomeBox}>
                     <Text style={styles.text1}>Welcome to</Text>
                     <Text style={styles.text2}>FurniShare!</Text>
@@ -49,6 +50,16 @@ const styles = StyleSheet.create({
         width: windowWidth,
         alignItems: "center",
         justifyContent: "center",
+    },
+    logo: {
+        position: 'absolute',
+        top: 50,
+        right: 25,
+        height: 90,
+        width: 90,
+        backgroundColor: 'white',
+        borderRadius: 90,
+        
     },
     image: {
         flex: 1,

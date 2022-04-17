@@ -97,11 +97,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: theme.colors.primary,
   },
-
-  button: {
-    marginTop: 24,
-    backgroundColor: 'grey',
-    alignSelf: 'center',
-    elevation: 6,
+  button:{
+    borderRadius: 20,
+    backgroundColor: 'black',
   },
 }) 
