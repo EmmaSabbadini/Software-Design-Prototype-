@@ -29,7 +29,7 @@ export default function LoginScreen({ navigation }) {
       .then((userCredentials) => {
         const user = userCredentials.user;
         console.log("Logged in with:", user.email);
-        navigation.navigate("User");
+        navigation.navigate('BottomTab');
       })
       .catch((error) => alert(error.message));
   };

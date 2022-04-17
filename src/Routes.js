@@ -23,32 +23,23 @@ const BottomTab = () => {
   const Tab = createBottomTabNavigator();
 
   return(
-      <Tab.Navigator
-        screenOptions={{
-          showLabel: false,
-          style: {
-            position: 'absolute',
-            backgroundColor: 'pink',
-            height: 100,
-          }
-        }}
-      >
-        <Tab.Screen
-          name = 'User'
-          component={User}
-          options={{headerShown:false,}}
-        />
-        <Tab.Screen 
-          name = 'Explore'
-          component={Explore}
-          options={{headerShown:false,}}
-        />
-        <Tab.Screen 
-          name = 'Settings'
-          component={Settings}
-          options={{headerShown:false,}}
-        />
-      </Tab.Navigator>
+    <Tab.Navigator>
+      <Tab.Screen 
+        name = 'User'
+        component={User}
+        options={{headerShown:false,}}
+      />
+      <Tab.Screen 
+        name = 'Explore'
+        component={Explore}
+        options={{headerShown:false,}}
+      />
+      <Tab.Screen 
+        name = 'Settings'
+        component={Settings}
+        options={{headerShown:false,}}
+      />
+    </Tab.Navigator>
   );
 
 }
