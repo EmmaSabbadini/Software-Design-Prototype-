@@ -149,7 +149,7 @@ export default function Item({navigation}){
                     <Button style={styles.button} mode="contained" onPress={() => {navigation.navigate('Bid', {item: item, itemID: route.params.fileName, user: user})}}>
                         Bid
                     </Button>
-                    <Text style={styles.itemName}>{item.name + '   ' + item.price + ' €'}</Text>
+                    <Text style={styles.itemName}>{item.name + '   €' + item.price}</Text>
                     <Text style={styles.subtitle}>{"Posted by " + item.owner_name}</Text>
                     <Text style={styles.itemType}>{item.type}</Text>
                     <Text style={styles.itemDesc}>{item.desc}</Text>
@@ -204,7 +204,8 @@ const styles = StyleSheet.create({
     },   
 
     button: {
-        backgroundColor: 'grey',
+        backgroundColor: 'black',
+        borderRadius: 20,
         alignSelf: 'center',
         width: '90%',
         elevation: 6,

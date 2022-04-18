@@ -192,8 +192,9 @@ const styles = StyleSheet.create({
     }, 
     
     button: {
-        backgroundColor: 'grey',
+        backgroundColor: 'black',
         alignSelf: 'center',
+        borderRadius: 20,
         width: '90%',
         shadowOpacity: 0.8,
         elevation: 6,

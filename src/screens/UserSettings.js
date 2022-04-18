@@ -214,23 +214,23 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     color: 'black',
-    },  
-    button: {
-      backgroundColor: 'grey',
-      width: 260,
-      elevation: 6,
-
-    },
-    imageBox: {
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    image:{
-      width: 100,
-      height: 100,
-    },
-    text: {
-      fontSize: 16,
-      padding: 5,
-    },  
+  },  
+  button: {
+    backgroundColor: 'black',
+    borderRadius: 20,
+    width: 260,
+    elevation: 6,
+  },
+  imageBox: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  image:{
+    width: 100,
+    height: 100,
+  },
+  text: {
+    fontSize: 16,
+    padding: 5,
+  },  
 })

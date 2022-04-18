@@ -18,10 +18,10 @@ import Bid from './screens/Bid';
 import MyItems from './screens/MyItems';
 import CheckBid from './screens/CheckBid';
 
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
 const BottomTab = () => {
-
-  const Tab = createBottomTabNavigator();
-
   return(
     <Tab.Navigator>
       <Tab.Screen 
@@ -41,13 +41,11 @@ const BottomTab = () => {
       />
     </Tab.Navigator>
   );
-
-}
+};
 
 export default Routes = () => {
-    const Stack = createNativeStackNavigator()
     return (
-      <NavigationContainer >
+      <NavigationContainer>
         <Stack.Navigator initialRouteName="Welcome">
           <Stack.Screen
             name = 'BottomTab'
@@ -124,9 +122,3 @@ export default Routes = () => {
     )
   }
 
-const styles = StyleSheet.create({
-    icon: {
-      height: 22,
-      width: 22,
-    },
-})

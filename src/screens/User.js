@@ -17,6 +17,7 @@ const AppButton = ({ onPress, icon, title, subtitle, backgroundColor, navigation
       flexDirection= 'row-reverse'
       color='black'
       name={icon}
+      borderRadius={20}
       backgroundColor={backgroundColor}
       onPress={onPress}
       style={styles.appButton}>
@@ -63,11 +64,11 @@ export default function User({navigation}){
             <SafeAreaView>
             <Image style={styles.profile_img} source={{uri: imageUrl}}/>
             <View style = {styles.userbox}>
+            <Image style = {styles.profile_img} source={{uri: "https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"}}/>
                 <View>
                     <Text style={styles.header}> Profile </Text>
                     <UserInfo title={name} subtitle={email}/>
                 </View>
-                
                 <View style={styles.screenContainer}>
                         <AppButton 
                             icon="chevron-right" 

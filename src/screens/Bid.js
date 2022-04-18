@@ -53,7 +53,7 @@ export default function Bid({navigation} ) {
         console.log(item)
         return (
             <Button style={styles.button} mode="contained" onPress={() => {navigation.navigate('CheckBid', {bid: item.bid, bidder_name: item.bidder_name, bidder_email: item.bidder_email})}}>
-                { item.bid + '€ : ' + item.bidder_name} 
+                { '€' + item.bid + ' : ' + item.bidder_name} 
             </Button>
             
         );
@@ -144,9 +144,6 @@ export default function Bid({navigation} ) {
         </Background>
     );
 
-    
-
-
 }
 
 const styles = StyleSheet.create({
@@ -162,9 +159,9 @@ const styles = StyleSheet.create({
     },
 
     button: {
-        backgroundColor: 'grey',
+        backgroundColor: 'black',
+        borderRadius: 20,
         width: 260,
         elevation: 6,
-  
       },
 });

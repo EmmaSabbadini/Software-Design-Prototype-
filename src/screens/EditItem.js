@@ -201,11 +201,11 @@ const styles = StyleSheet.create({
 
     },   
     button: {
-        backgroundColor: 'grey',
+        backgroundColor: 'black',
+        borderRadius: 20,
         alignSelf: 'center',
         width: '90%',
         elevation: 6,
-  
       },
 
 })

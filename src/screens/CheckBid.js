@@ -18,7 +18,7 @@ export default function CheckBid({navigation} ){
         <Background>
             <View style={styles.container}>
                 <Text style={styles.titleText}>{'Name: ' + bidder_name}</Text>
-                <Text style={styles.titleText}>{'Bid: ' + bid + ' €'}</Text>
+                <Text style={styles.titleText}>{'Bid: ' + '€' + bid}</Text>
                 <Text style={styles.titleText}>{bidder_email}</Text>
             </View>
         </Background>
