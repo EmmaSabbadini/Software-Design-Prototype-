@@ -62,7 +62,6 @@ export default function User({navigation}){
     if (user){
         return (
             <SafeAreaView>
-            <Image style={styles.profile_img} source={{uri: imageUrl}}/>
             <View style = {styles.userbox}>
             <Image style = {styles.profile_img} source={{uri: "https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"}}/>
                 <View>
@@ -116,7 +115,7 @@ const styles = StyleSheet.create({
         paddingTop: StatusBar.currentHeight,
     },
     screenContainer: {
-        top: '20%',
+        top: '15%',
         justifyContent: "center",
     },
     appButtonDescText: {
@@ -174,7 +173,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         borderWidth:3,
         borderColor:'#ffffff',
-        top: 90,
+        top: 45,
         left: 20,
         width: 100, 
         height: 100, 
